@@ -115,7 +115,7 @@
                 <!-- Tambahkan pilihan lain jika diperlukan -->
             </select>
         </div>
-
+        <br>
         <div>
             <button type="submit" class="btn btn-primary">Daftar</button>
         </div>

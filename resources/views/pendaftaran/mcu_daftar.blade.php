@@ -34,7 +34,7 @@
             <label for="foto_bst">Upload Foto BST</label>
             <input type="file" class="form-control" id="foto_bst" name="foto_bst" required>
         </div>
-
+        <br>
         <div>
             <button type="submit" class="btn btn-primary">Daftar</button>
         </div>

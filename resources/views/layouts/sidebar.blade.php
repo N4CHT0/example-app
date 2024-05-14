@@ -401,6 +401,31 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-header">ADMINISTRASI</li>
+                <li class="nav-item">
+                    <a href="{{ route('Keuangan.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            DATA KEUANGAN
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('Inventory.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            INVENTORY SERTIFIKAT
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('SAPRAS.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
+                        <p>
+                            SARANA & PRASARANA
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">AKUN</li>
                 <li class="nav-item">
                     <a href="" class="nav-link"

@@ -300,6 +300,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_npwp' => $data['scan_foto_npwp'] ?? $model->scan_foto_npwp,
             'scan_foto_sertifikat' => $data['scan_foto_sertifikat'] ?? $model->scan_foto_sertifikat,
         ]);
+        return redirect()->route('PerpanjangREOR.index')->with('success', 'Data Telah Diperbarui');
     }
 
     /**

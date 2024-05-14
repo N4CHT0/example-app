@@ -3,15 +3,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">Data Pendaftar Perpanjangan Sertifikat GMDSS</h3>
+                <h3 class="card-title">Data Sarana & Prasarana BBU</h3>
             </div>
             <div class="card-body">
                 <div class="btn-group mb-3 justify-content-between">
-                    <a href="{{ route('CetakData.Perpanjang_Sertifikat_GMDSS') }}"
-                        class="btn btn-danger d-flex align-items-center">
+                    <a href="{{ route('CetakData.SAPRAS') }}" class="btn btn-danger d-flex align-items-center">
                         Cetak Data
                     </a>
-                    <a href="{{ route('perpanjang.gmdss_create') }}" class="btn btn-success ms-2 d-flex align-items-center">
+                    <a href="{{ route('SAPRAS.create') }}" class="btn btn-success ms-2 d-flex align-items-center">
                         Tambah Data
                     </a>
                 </div>
@@ -20,13 +19,11 @@
                         <tr>
                             <th>No</th>
                             <th>ID</th>
-                            <th>Seafare Code</th>
-                            <th>Nama Lengkap</th>
-                            <th>NIK</th>
-                            <th>Lembaga Diklat</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Email</th>
-                            <th>No Telp</th>
+                            <th>Jenis Fasilitas</th>
+                            <th>Nama Fasilitas</th>
+                            <th>Jumlah</th>
+                            <th>Kondisi</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,28 +33,24 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->seafare_code }}</td>
-                                <td>{{ $item->nama_lengkap }}</td>
-                                <td>{{ $item->nik }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
-                                <td>{{ $item->lembaga_diklat }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->no_telp }}</td>
+                                <td>{{ $item->jenis_fasilitas }}</td>
+                                <td>{{ $item->nama_fasilitas }}</td>
+                                <td>{{ $item->jumlah }}</td>
+                                <td>{{ $item->kondisi }}</td>
+                                <td>{{ $item->status }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="/report_perpanjang_sertifikat_gmdss_pdf/{{ $item->id }}"
+                                        <a href="/report_sarana_prasarana_pdf/{{ $item->id }}"
                                             class="btn btn-dark btn-sm">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
-                                        <a href="/data_perpanjang_sertifikat_gmdss/show/{{ $item->id }}"
-                                            class="btn btn-info btn-sm">
+                                        <a href="sapras/show/{{ $item->id }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="/data_perpanjang_sertifikat_gmdss/edit/{{ $item->id }}"
-                                            class="btn btn-warning btn-sm">
+                                        <a href="/sapras/edit/{{ $item->id }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('PerpanjangGMDSS.destroy', $item->id) }}" method="POST">
+                                        <form action="{{ route('SAPRAS.destroy', $item->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger btn-sm">

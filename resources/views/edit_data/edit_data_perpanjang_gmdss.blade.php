@@ -136,43 +136,43 @@
                     <div class="form-group">
                         <label for="foto">Upload Foto</label>
                         <input type="file" class="form-control" id="foto" name="foto"
-                            value="{{ $data->foto }}"required>
+                            value="{{ $data->foto }}>
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_ijazah_laut">Upload Scan/Foto Ijazah Laut</label>
                         <input type="file" class="form-control" id="scan_foto_ijazah_laut"
-                            name="scan_foto_ijazah_laut" value="{{ $data->scan_foto_ijazah_laut }}" required>
+                            name="scan_foto_ijazah_laut" value="{{ $data->scan_foto_ijazah_laut }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_masa_layar">Upload Scan/Foto Masa Layar</label>
                         <input type="file" class="form-control" id="scan_foto_masa_layar" name="scan_foto_masa_layar"
-                            value="{{ $data->scan_foto_masa_layar }}"required>
+                            value="{{ $data->scan_foto_masa_layar }}>
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_mcu">Upload Scan/Foto Sertifikat MCU</label>
                         <input type="file" class="form-control" id="scan_foto_mcu" name="scan_foto_mcu"
-                            value="{{ $data->scan_foto_mcu }}" required>
+                            value="{{ $data->scan_foto_mcu }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_sertifikat_bst">Upload Scan/Foto Sertifikat BST</label>
                         <input type="file" class="form-control" id="scan_foto_sertifikat_bst"
-                            name="scan_foto_sertifikat_bst" value="{{ $data->scan_foto_sertifikat_bst }}" required>
+                            name="scan_foto_sertifikat_bst" value="{{ $data->scan_foto_sertifikat_bst }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_ktp">Upload Scan/Foto KTP</label>
                         <input type="file" class="form-control" id="scan_foto_ktp" name="scan_foto_ktp"
-                            value="{{ $data->scan_foto_ktp }}" required>
+                            value="{{ $data->scan_foto_ktp }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_akte">Upload Scan/Foto Akte</label>
                         <input type="file" class="form-control" id="scan_foto_akte" name="scan_foto_akte"
-                            value="{{ $data->scan_foto_akte }}" required>
+                            value="{{ $data->scan_foto_akte }}">
                     </div>
 
                     <div class="form-group">

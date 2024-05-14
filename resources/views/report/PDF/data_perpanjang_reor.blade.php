@@ -129,6 +129,7 @@
         <div class="notes">
             <p>Note: Data Diambil Dari BBU.</p>
         </div>
+    </div>
 </body>
 
 </html>

@@ -4,9 +4,11 @@ use App\Http\Controllers\DaftarCOPController;
 use App\Http\Controllers\DaftarGMDSSController;
 use App\Http\Controllers\DaftarMCUController;
 use App\Http\Controllers\DaftarREORController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\PerpanjangGMDSSController;
 use App\Http\Controllers\PerpanjangREORController;
+use App\Http\Controllers\SAPRASController;
 use Illuminate\Support\Facades\Route;
 
 // LANDING PAGE
@@ -136,3 +138,23 @@ Route::delete('keuangan/delete/{id}', [KeuanganController::class, 'destroy'])->n
 
 
 // INVENTORY SERTIFIKAT
+Route::get('/report_data_inventory_all', [InventoryController::class, 'exportAllExcel'])->name('CetakData.Inventory');
+Route::get('/report_inventory_pdf/{id}', [InventoryController::class, 'exportPDF'])->name('CetakDataPDF.Inventory');
+Route::get('/inventory', [InventoryController::class, 'index'])->name('Inventory.index');
+Route::get('/inventory/create', [InventoryController::class, 'create'])->name('Inventory.create');
+Route::post('/inventory', [InventoryController::class, 'store'])->name('Inventory.store');
+Route::get('/inventory/show/{id}', [InventoryController::class, 'show'])->name('Inventory.show');
+Route::get('/inventory/edit/{id}', [InventoryController::class, 'edit'])->name('Inventory.edit');
+Route::put('/inventory/update/{id}', [InventoryController::class, 'update'])->name('Inventory.update');
+Route::delete('inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('Inventory.destroy');
+
+// SARANA & PRASARANA
+Route::get('/report_data_sarana_prasarana_all', [SAPRASController::class, 'exportAllExcel'])->name('CetakData.SAPRAS');
+Route::get('/report_sarana_prasarana_pdf/{id}', [SAPRASController::class, 'exportPDF'])->name('CetakDataPDF.SAPRAS');
+Route::get('/sapras', [SAPRASController::class, 'index'])->name('SAPRAS.index');
+Route::get('/sapras/create', [SAPRASController::class, 'create'])->name('SAPRAS.create');
+Route::post('/sapras', [SAPRASController::class, 'store'])->name('SAPRAS.store');
+Route::get('/sapras/show/{id}', [SAPRASController::class, 'show'])->name('SAPRAS.show');
+Route::get('/sapras/edit/{id}', [SAPRASController::class, 'edit'])->name('SAPRAS.edit');
+Route::put('/sapras/update/{id}', [SAPRASController::class, 'update'])->name('SAPRAS.update');
+Route::delete('sapras/delete/{id}', [SAPRASController::class, 'destroy'])->name('SAPRAS.destroy');

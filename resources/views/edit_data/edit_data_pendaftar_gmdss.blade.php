@@ -8,6 +8,7 @@
                 </p>
                 <form action="{{ route('DaftarGMDSS.update', $data->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label for="kewarganegaraan">Kewarganegaraan</label>
                         <select class="form-control" id="kewarganegaraan" name="kewarganegaraan" required>
@@ -106,7 +107,7 @@
                     <div class="form-group">
                         <label for="foto">Upload Foto</label>
                         <input type="file" class="form-control" id="foto" name="foto"
-                            value="{{ $data->foto }}" required>
+                            value="{{ $data->foto }}">
                     </div>
 
                     <div class="form-group">

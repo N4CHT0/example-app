@@ -100,25 +100,25 @@
                     <div class="form-group">
                         <label for="foto">Upload Foto</label>
                         <input type="file" class="form-control" id="foto" name="foto"
-                            value="{{ $data->foto }}" required>
+                            value="{{ $data->foto }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_npwp">Upload Scan/Foto NPWP</label>
                         <input type="file" class="form-control" id="scan_foto_npwp" name="scan_foto_npwp"
-                            value="{{ $data->scan_foto_npwp }}" required>
+                            value="{{ $data->scan_foto_npwp }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_ijazah">Upload Scan/Foto Ijazah</label>
                         <input type="file" class="form-control" id="scan_foto_ijazah" name="scan_foto_ijazah"
-                            value="{{ $data->scan_foto_ijazah }}" required>
+                            value="{{ $data->scan_foto_ijazah }}">
                     </div>
 
                     <div class="form-group">
                         <label for="scan_foto_sertifikat">Upload Scan/Foto Sertifikat</label>
                         <input type="file" class="form-control" id="scan_foto_sertifikat" name="scan_foto_sertifikat"
-                            value="{{ $data->scan_foto_sertifikat }}" required>
+                            value="{{ $data->scan_foto_sertifikat }}">
                     </div>
 
                     <div class="form-group">

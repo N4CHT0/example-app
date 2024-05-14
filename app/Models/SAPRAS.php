@@ -6,24 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class InventorySertifikat extends Model
+class SAPRAS extends Model
 {
     use HasFactory;
-    protected $table = 'inventory_sertifikat';
+    protected $table = 'sarana_prasarana';
     protected $primarykey = "id";
     protected $keyType = 'string';
     public $incrementing = false;
     protected $fillable = [
         'id',
-        'jenis_sertifikat',
-        'nama_pemilik',
-        'no_sertifikat',
-        'status_sertifikat',
-        'foto_sertifikat',
-        'bukti_pengambilan',
-        'bukti_pengiriman',
-        'email',
-        'no_telp',
+        'jenis_fasilitas',
+        'nama_fasilitas',
+        'jumlah',
+        'kondisi',
+        'status',
     ];
     protected static function boot()
     {

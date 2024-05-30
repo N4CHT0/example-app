@@ -1,20 +1,60 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiSiswaController;
 use App\Http\Controllers\DaftarCOPController;
 use App\Http\Controllers\DaftarGMDSSController;
 use App\Http\Controllers\DaftarMCUController;
 use App\Http\Controllers\DaftarREORController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\NilaiUjianLokalController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\PerpanjangGMDSSController;
 use App\Http\Controllers\PerpanjangREORController;
+use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\PesertaUjianController;
 use App\Http\Controllers\SAPRASController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard_', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
+
 
 // LANDING PAGE
 Route::get('/', function () {
     return view('welcome');
 })->name('Home');
+
+// HOMEPAGE
+Route::get('/home/admin', [HomeController::class, 'admin'])->middleware(['auth', 'admin'])->name('Dashboard.Admin');
+Route::get('/home/siswa', [HomeController::class, 'siswa'])->middleware(['auth', 'siswa'])->name('Dashboard.Siswa');
+Route::get('/home/pegawai', [HomeController::class, 'pegawai'])->middleware(['auth', 'pegawai'])->name('Dashboard.Pegawai');
+Route::get('/home/pengajar', [HomeController::class, 'pengajar'])->middleware(['auth', 'pengajar'])->name('Dashboard.Pengajar');
+
+// DASHBOARD SISWA/PESERTA
+Route::get('/absensi', [PesertaController::class, 'Absensi'])->name('Peserta.Absensi');
+Route::get('/nilai', [PesertaController::class, 'Nilai'])->name('Peserta.Nilai');
+Route::get('/edit/{user}', [PesertaController::class, 'Edit'])->name('Peserta.Edit');
+Route::put('/update/{user}', [PesertaController::class, 'update'])->name('Peserta.Update');
 
 
 // PENDAFTARAN DIKLAT REOR
@@ -158,3 +198,96 @@ Route::get('/sapras/show/{id}', [SAPRASController::class, 'show'])->name('SAPRAS
 Route::get('/sapras/edit/{id}', [SAPRASController::class, 'edit'])->name('SAPRAS.edit');
 Route::put('/sapras/update/{id}', [SAPRASController::class, 'update'])->name('SAPRAS.update');
 Route::delete('sapras/delete/{id}', [SAPRASController::class, 'destroy'])->name('SAPRAS.destroy');
+
+// PEGAWAI
+Route::get('/report_data_pegawai_all', [PegawaiController::class, 'exportAllExcel'])->name('CetakData.Pegawai');
+Route::get('/report_pegawai_pdf/{id}', [PegawaiController::class, 'exportPDF'])->name('CetakDataPDF.Pegawai');
+Route::get('/pegawai', [PegawaiController::class, 'index'])->name('Pegawai.index');
+Route::get('/pegawai/create', [PegawaiController::class, 'create'])->name('Pegawai.create');
+Route::post('/pegawai', [PegawaiController::class, 'store'])->name('Pegawai.store');
+Route::get('/pegawai/show/{id}', [PegawaiController::class, 'show'])->name('Pegawai.show');
+Route::get('/pegawai/edit/{id}', [PegawaiController::class, 'edit'])->name('Pegawai.edit');
+Route::put('/pegawai/update/{id}', [PegawaiController::class, 'update'])->name('Pegawai.update');
+Route::delete('pegawai/delete/{id}', [PegawaiController::class, 'destroy'])->name('Pegawai.destroy');
+
+// PENGAJAR
+Route::get('/report_data_pengajar_all', [PengajarController::class, 'exportAllExcel'])->name('CetakData.Pengajar');
+Route::get('/report_pengajar_pdf/{id}', [PengajarController::class, 'exportPDF'])->name('CetakDataPDF.Pengajar');
+Route::get('/pengajar', [PengajarController::class, 'index'])->name('Pengajar.index');
+Route::get('/pengajar/create', [PengajarController::class, 'create'])->name('Pengajar.create');
+Route::post('/pengajar', [PengajarController::class, 'store'])->name('Pengajar.store');
+Route::get('/pengajar/show/{id}', [PengajarController::class, 'show'])->name('Pengajar.show');
+Route::get('/pengajar/edit/{id}', [PengajarController::class, 'edit'])->name('Pengajar.edit');
+Route::put('/pengajar/update/{id}', [PengajarController::class, 'update'])->name('Pengajar.update');
+Route::delete('pengajar/delete/{id}', [PengajarController::class, 'destroy'])->name('Pengajar.destroy');
+
+// JADWAL
+Route::get('/report_data_jadwal_all', [JadwalController::class, 'exportAllExcel'])->name('CetakData.Jadwal');
+Route::get('/report_jadwal_pdf/{id}', [JadwalController::class, 'exportPDF'])->name('CetakDataPDF.Jadwal');
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('Jadwal.index');
+Route::get('/jadwal/create', [JadwalController::class, 'create'])->name('Jadwal.create');
+Route::post('/jadwal', [JadwalController::class, 'store'])->name('Jadwal.store');
+Route::get('/jadwal/show/{id}', [JadwalController::class, 'show'])->name('Jadwal.show');
+Route::get('/jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('Jadwal.edit');
+Route::put('/jadwal/update/{id}', [JadwalController::class, 'update'])->name('Jadwal.update');
+Route::delete('jadwal/delete/{id}', [JadwalController::class, 'destroy'])->name('Jadwal.destroy');
+
+// MATA PELAJARAN
+Route::get('/report_data_mata_pelajaran_all', [MataPelajaranController::class, 'exportAllExcel'])->name('CetakData.MataPelajaran');
+Route::get('/report_mata_pelajaran_pdf/{id}', [MataPelajaranController::class, 'exportPDF'])->name('CetakDataPDF.MataPelajaran');
+Route::get('/mata_pelajaran', [MataPelajaranController::class, 'index'])->name('MataPelajaran.index');
+Route::get('/mata_pelajaran/create', [MataPelajaranController::class, 'create'])->name('MataPelajaran.create');
+Route::post('/mata_pelajaran', [MataPelajaranController::class, 'store'])->name('MataPelajaran.store');
+Route::get('/mata_pelajaran/show/{id}', [MataPelajaranController::class, 'show'])->name('MataPelajaran.show');
+Route::get('/mata_pelajaran/edit/{id}', [MataPelajaranController::class, 'edit'])->name('MataPelajaran.edit');
+Route::put('/mata_pelajaran/update/{id}', [MataPelajaranController::class, 'update'])->name('MataPelajaran.update');
+Route::delete('mata_pelajaran/delete/{id}', [MataPelajaranController::class, 'destroy'])->name('MataPelajaran.destroy');
+
+// PENGGUNA SIMBBU
+Route::get('/report_data_users_all', [UserController::class, 'exportAllExcel'])->name('CetakData.Users');
+Route::get('/report_users_pdf/{id}', [UserController::class, 'exportPDF'])->name('CetakDataPDF.Users');
+Route::get('/users', [UserController::class, 'index'])->name('Users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('Users.create');
+Route::post('/users', [UserController::class, 'store'])->name('Users.store');
+Route::get('/users/show/{id}', [UserController::class, 'show'])->name('Users.show');
+Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('Users.edit');
+Route::put('/users/update/{id}', [UserController::class, 'update'])->name('Users.update');
+Route::delete('users/delete/{id}', [UserController::class, 'destroy'])->name('Users.destroy');
+
+
+// ABSENSI
+Route::post("nama_untuk_absensi", [AbsensiSiswaController::class, 'getNama'])->name('Absensi.get');
+Route::get('/report_data_absensi_siswa_all', [AbsensiSiswaController::class, 'exportAllExcel'])->name('CetakData.Absensi');
+Route::get('/report_absensi_siswa_pdf/{id}', [AbsensiSiswaController::class, 'exportPDF'])->name('CetakDataPDF.Absensi');
+Route::get('/absensi_siswa', [AbsensiSiswaController::class, 'index'])->name('Absensi.index');
+Route::get('/absensi_siswa/create', [AbsensiSiswaController::class, 'create'])->name('Absensi.create');
+Route::post('/absensi_siswa', [AbsensiSiswaController::class, 'store'])->name('Absensi.store');
+Route::get('/absensi_siswa/show/{id}', [AbsensiSiswaController::class, 'show'])->name('Absensi.show');
+Route::get('/absensi_siswa/edit/{id}', [AbsensiSiswaController::class, 'edit'])->name('Absensi.edit');
+Route::put('/absensi_siswa/update/{id}', [AbsensiSiswaController::class, 'update'])->name('Absensi.update');
+Route::delete('absensi_siswa/delete/{id}', [AbsensiSiswaController::class, 'destroy'])->name('Absensi.destroy');
+
+
+// PESERTA UJIAN
+Route::get('/report_data_peserta_ujian_all', [PesertaUjianController::class, 'exportAllExcel'])->name('CetakData.PesertaUjian');
+Route::get('/report_peserta_ujian_pdf/{id}', [PesertaUjianController::class, 'exportPDF'])->name('CetakDataPDF.PesertaUjian');
+Route::get('/peserta_ujian', [PesertaUjianController::class, 'index'])->name('PesertaUjian.index');
+Route::get('/peserta_ujian/create', [PesertaUjianController::class, 'create'])->name('PesertaUjian.create');
+Route::post('/peserta_ujian', [PesertaUjianController::class, 'store'])->name('PesertaUjian.store');
+Route::post("nama_untuk_peserta_ujian_lokal", [PesertaUjianController::class, 'getNama'])->name('PesertaUjian.get');
+Route::get('/peserta_ujian/show/{id}', [PesertaUjianController::class, 'show'])->name('PesertaUjian.show');
+Route::get('/peserta_ujian/edit/{id}', [PesertaUjianController::class, 'edit'])->name('PesertaUjian.edit');
+Route::put('/peserta_ujian/update/{id}', [PesertaUjianController::class, 'update'])->name('PesertaUjian.update');
+Route::delete('peserta_ujian/delete/{id}', [PesertaUjianController::class, 'destroy'])->name('PesertaUjian.destroy');
+
+// NILAI UJIAN LOKAL
+Route::post("nama_untuk_nilai_ujian_lokal", [NilaiUjianLokalController::class, 'getNama'])->name('NilaiUjianLokal.get');
+Route::get('/report_data_nilai_ujian_lokal_all', [NilaiUjianLokalController::class, 'exportAllExcel'])->name('CetakData.NilaiUjianLokal');
+Route::get('/report_nilai_ujian_lokal_pdf/{id}', [NilaiUjianLokalController::class, 'exportPDF'])->name('CetakDataPDF.NilaiUjianLokal');
+Route::get('/nilai_ujian_lokal', [NilaiUjianLokalController::class, 'index'])->name('NilaiUjianLokal.index');
+Route::get('/nilai_ujian_lokal/create', [NilaiUjianLokalController::class, 'create'])->name('NilaiUjianLokal.create');
+Route::post('/nilai_ujian_lokal', [NilaiUjianLokalController::class, 'store'])->name('NilaiUjianLokal.store');
+Route::get('/nilai_ujian_lokal/show/{id}', [NilaiUjianLokalController::class, 'show'])->name('NilaiUjianLokal.show');
+Route::get('/nilai_ujian_lokal/edit/{id}', [NilaiUjianLokalController::class, 'edit'])->name('NilaiUjianLokal.edit');
+Route::put('/nilai_ujian_lokal/update/{id}', [NilaiUjianLokalController::class, 'update'])->name('NilaiUjianLokal.update');
+Route::delete('nilai_ujian_lokal/delete/{id}', [NilaiUjianLokalController::class, 'destroy'])->name('NilaiUjianLokal.destroy');

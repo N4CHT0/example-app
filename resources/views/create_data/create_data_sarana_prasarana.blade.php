@@ -10,7 +10,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="jenis_fasilitas">Jenis Fasilitas</label>
-                        <input type="text" class="form-control" id="jenis_fasilitas" name="jenis_fasilitas" required>
+                        <select class="form-control" id="jenis_fasilitas" name="jenis_fasilitas" required>
+                            <!-- Pilihan role sesuai dengan kebutuhan -->
+                            <option value="PRASARANA">PRASARANA</option>
+                            <option value="SARANA">SARANA</option>
+                        </select>
                     </div>
 
                     <div class="form-group">

@@ -50,6 +50,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_ijazah' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'alamat' => 'required',
             'agama' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'nik.required' => 'NIK Wajib Di Isi',
@@ -72,6 +73,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_sertifikat.required' => 'Scan/Foto Sertifikat Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Di Isi',
             'agama.required' => 'Agama Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
         ]);
 
         $data = [
@@ -91,6 +93,7 @@ class PerpanjangREORController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan_desa' => $request->kelurahan_desa,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -129,6 +132,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_ijazah' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'alamat' => 'required',
             'agama' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'nik.required' => 'NIK Wajib Di Isi',
@@ -151,6 +155,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_sertifikat.required' => 'Scan/Foto Sertifikat Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Di Isi',
             'agama.required' => 'Agama Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
         ]);
 
         $data = [
@@ -170,6 +175,7 @@ class PerpanjangREORController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan_desa' => $request->kelurahan_desa,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -244,6 +250,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_ijazah' => $request->hasFile('scan_foto_ijazah') ? 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080' : '',
             'scan_foto_sertifikat' => $request->hasFile('scan_foto_sertifikat') ? 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080' : '',
             'alamat' => 'required',
+            'edit_foto' => 'required',
             'agama' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
@@ -265,6 +272,7 @@ class PerpanjangREORController extends Controller
             'scan_foto_sertifikat.required' => 'Scan/Foto Sertifikat Wajib Diupload',
             'scan_foto_ijazah.required' => 'Scan/Foto Ijazah Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
             'agama.required' => 'Agama Wajib Di Isi',
         ]);
 
@@ -295,6 +303,7 @@ class PerpanjangREORController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan_desa' => $request->kelurahan_desa,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
             'foto' => $data['foto'] ?? $model->foto,
             'scan_foto_ijazah' => $data['scan_foto_ijazah'] ?? $model->scan_foto_ijazah,
             'scan_foto_npwp' => $data['scan_foto_npwp'] ?? $model->scan_foto_npwp,

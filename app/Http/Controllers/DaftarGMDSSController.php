@@ -47,6 +47,7 @@ class DaftarGMDSSController extends Controller
             'pekerjaan' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'alamat' => 'required',
+            'edit_foto' => 'required',
             'nama_ibu_kandung' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
@@ -67,6 +68,7 @@ class DaftarGMDSSController extends Controller
             'seafare_code.required' => 'Seafare Code Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Diupload',
+            'edit_foto.required' => 'Edit Foto Wajib Diupload',
         ]);
 
         $data = [
@@ -87,6 +89,7 @@ class DaftarGMDSSController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan_desa' => $request->kelurahan_desa,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -120,6 +123,7 @@ class DaftarGMDSSController extends Controller
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'alamat' => 'required',
             'nama_ibu_kandung' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'nik.required' => 'NIK Wajib Di Isi',
@@ -139,6 +143,7 @@ class DaftarGMDSSController extends Controller
             'seafare_code.required' => 'Seafare Code Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Diupload',
+            'edit_foto.required' => 'Edit Foto Wajib Diupload',
         ]);
 
         $data = [
@@ -159,6 +164,7 @@ class DaftarGMDSSController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan_desa' => $request->kelurahan_desa,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -233,6 +239,7 @@ class DaftarGMDSSController extends Controller
             'alamat' => 'required',
             'nama_ibu' => 'required',
             'nama_ayah' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'jenis_sertifikat_cop.required' => 'Jenis Sertifikat COP Wajib Di Isi',
@@ -255,6 +262,7 @@ class DaftarGMDSSController extends Controller
             'seafare_code.required' => 'Seafare Code Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Diupload',
+            'edit_foto.required' => 'Edit Foto Wajib Diupload',
         ]);
 
         $data = [];
@@ -281,6 +289,7 @@ class DaftarGMDSSController extends Controller
             'kecamatan' => $request->kecamatan,
             'kelurahan_desa' => $request->kelurahan_desa,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
             'foto' => $data['foto'] ?? $model->foto,
         ]);
 

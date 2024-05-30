@@ -34,6 +34,7 @@ class PerpanjangGMDSS extends Model
         'status',
         'nama_ibu_kandung',
         'nama_ayah_kandung',
+        'edit_foto',
         'foto',
         'scan_foto_ijazah_laut',
         'scan_foto_masa_layar',

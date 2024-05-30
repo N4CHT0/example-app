@@ -46,6 +46,7 @@ class PerpanjangGMDSSController extends Controller
             'kecamatan' => 'required',
             'kode_pos' => 'required',
             'kelurahan_desa' => 'required',
+            'edit_foto' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_akte' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ktp' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -77,6 +78,7 @@ class PerpanjangGMDSSController extends Controller
             'nama_ibu_kandung.required' => 'Nama Ibu Kandung Wajib Di Isi',
             'nama_ayah_kandung.required' => 'Nama Ayah Kandung Wajib Di Isi',
             'lembaga_diklat.required' => 'Diklat Asal Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'scan_foto_ktp.required' => 'Scan/Foto KTP Wajib Diupload',
             'scan_foto_masa_layar.required' => 'Scan/Foto Masa Layar Wajib Diupload',
@@ -110,6 +112,7 @@ class PerpanjangGMDSSController extends Controller
             'kode_pos' => $request->kode_pos,
             'alamat' => $request->alamat,
             'kewarganegaraan' => $request->kewarganegaraan,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -147,6 +150,7 @@ class PerpanjangGMDSSController extends Controller
             'kecamatan' => 'required',
             'kode_pos' => 'required',
             'kelurahan_desa' => 'required',
+            'edit_foto' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_akte' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ktp' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -178,6 +182,7 @@ class PerpanjangGMDSSController extends Controller
             'nama_ibu_kandung.required' => 'Nama Ibu Kandung Wajib Di Isi',
             'nama_ayah_kandung.required' => 'Nama Ayah Kandung Wajib Di Isi',
             'lembaga_diklat.required' => 'Diklat Asal Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'scan_foto_ktp.required' => 'Scan/Foto KTP Wajib Diupload',
             'scan_foto_masa_layar.required' => 'Scan/Foto Masa Layar Wajib Diupload',
@@ -211,6 +216,7 @@ class PerpanjangGMDSSController extends Controller
             'kode_pos' => $request->kode_pos,
             'alamat' => $request->alamat,
             'kewarganegaraan' => $request->kewarganegaraan,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -285,6 +291,7 @@ class PerpanjangGMDSSController extends Controller
             'kecamatan' => 'required',
             'kode_pos' => 'required',
             'kelurahan_desa' => 'required',
+            'edit_foto' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_akte' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ktp' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -316,6 +323,7 @@ class PerpanjangGMDSSController extends Controller
             'nama_ibu_kandung.required' => 'Nama Ibu Kandung Wajib Di Isi',
             'nama_ayah_kandung.required' => 'Nama Ayah Kandung Wajib Di Isi',
             'lembaga_diklat.required' => 'Diklat Asal Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'scan_foto_ktp.required' => 'Scan/Foto KTP Wajib Diupload',
             'scan_foto_masa_layar.required' => 'Scan/Foto Masa Layar Wajib Diupload',
@@ -360,6 +368,7 @@ class PerpanjangGMDSSController extends Controller
             'kode_pos' => $request->kode_pos,
             'alamat' => $request->alamat,
             'kewarganegaraan' => $request->kewarganegaraan,
+            'edit_foto' => $request->edit_foto,
             'foto' => $data['foto'] ?? $model->foto, // Pastikan atribut sesuai dengan kolom di tabel
             'scan_foto_ktp' => $data['scan_foto_ktp'] ?? $model->scan_foto_ktp,
             'scan_foto_akte' => $data['scan_foto_akte'] ?? $model->scan_foto_akte,

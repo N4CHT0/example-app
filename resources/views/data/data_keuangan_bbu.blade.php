@@ -14,54 +14,56 @@
                         Tambah Data
                     </a>
                 </div>
-                <table id="example" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Berita Pembayaran</th>
-                            <th>Status Pembayaran</th>
-                            <th>Tanggal Pembayaran</th>
-                            <th>Petugas</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $no = 1 @endphp
-                        @foreach ($data as $item)
+                <div class="table-responsive">
+                    <table id="example" class="table table-bordered table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->berita_pembayaran }}</td>
-                                <td>{{ $item->status_pembayaran }}</td>
-                                <td>{{ $item->tanggal_pembayaran }}</td>
-                                <td>{{ $item->petugas }}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="/report_keuangan_pdf/{{ $item->id }}" class="btn btn-dark btn-sm">
-                                            <i class="fas fa-file-pdf"></i>
-                                        </a>
-                                        <a href="keuangan/show/{{ $item->id }}" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="/keuangan/edit/{{ $item->id }}" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('Keuangan.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th>No</th>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Berita Pembayaran</th>
+                                <th>Status Pembayaran</th>
+                                <th>Tanggal Pembayaran</th>
+                                <th>Petugas</th>
+                                <th>Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @php $no = 1 @endphp
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->berita_pembayaran }}</td>
+                                    <td>{{ $item->status_pembayaran }}</td>
+                                    <td>{{ $item->tanggal_pembayaran }}</td>
+                                    <td>{{ $item->petugas }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="/report_keuangan_pdf/{{ $item->id }}" class="btn btn-dark btn-sm">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
+                                            <a href="keuangan/show/{{ $item->id }}" class="btn btn-info btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="/keuangan/edit/{{ $item->id }}" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('Keuangan.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

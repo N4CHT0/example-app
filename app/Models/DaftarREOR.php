@@ -41,6 +41,7 @@ class DaftarREOR extends Model
         'nama_ayah',
         'pekerjaan_ayah',
         'penghasilan_ayah',
+        'edit_foto',
         'foto',
         'scan_foto_ijazah_terakhir',
         'scan_foto_akte',

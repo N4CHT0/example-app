@@ -14,55 +14,57 @@
                         Tambah Data
                     </a>
                 </div>
-                <table id="example" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>ID</th>
-                            <th>Jenis Fasilitas</th>
-                            <th>Nama Fasilitas</th>
-                            <th>Jumlah</th>
-                            <th>Kondisi</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $no = 1 @endphp
-                        @foreach ($data as $item)
+                <div class="table-responsive">
+                    <table id="example" class="table table-bordered table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->jenis_fasilitas }}</td>
-                                <td>{{ $item->nama_fasilitas }}</td>
-                                <td>{{ $item->jumlah }}</td>
-                                <td>{{ $item->kondisi }}</td>
-                                <td>{{ $item->status }}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="/report_sarana_prasarana_pdf/{{ $item->id }}"
-                                            class="btn btn-dark btn-sm">
-                                            <i class="fas fa-file-pdf"></i>
-                                        </a>
-                                        <a href="sapras/show/{{ $item->id }}" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="/sapras/edit/{{ $item->id }}" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('SAPRAS.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th>No</th>
+                                <th>ID</th>
+                                <th>Jenis Fasilitas</th>
+                                <th>Nama Fasilitas</th>
+                                <th>Jumlah</th>
+                                <th>Kondisi</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @php $no = 1 @endphp
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->jenis_fasilitas }}</td>
+                                    <td>{{ $item->nama_fasilitas }}</td>
+                                    <td>{{ $item->jumlah }}</td>
+                                    <td>{{ $item->kondisi }}</td>
+                                    <td>{{ $item->status }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="/report_sarana_prasarana_pdf/{{ $item->id }}"
+                                                class="btn btn-dark btn-sm">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
+                                            <a href="sapras/show/{{ $item->id }}" class="btn btn-info btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="/sapras/edit/{{ $item->id }}" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('SAPRAS.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

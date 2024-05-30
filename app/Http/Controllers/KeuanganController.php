@@ -55,7 +55,7 @@ class KeuanganController extends Controller
             'nama.required' => 'Nama wajib diisi',
             'berita_pembayaran.required' => 'Berita Pembayaran wajib diisi',
             'status_pembayaran.required' => 'Status Pembayaran wajib diisi',
-            'jumlah_uang.required' => 'Jumlah Uang wWjib diisi',
+            'jumlah_uang.required' => 'Jumlah Uang Wajib diisi',
             'petugas.required' => 'Petugas wajib diisi',
         ]);
 

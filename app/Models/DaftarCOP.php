@@ -34,6 +34,7 @@ class DaftarCOP extends Model
         'status',
         'nama_ibu',
         'nama_ayah',
+        'edit_foto',
         'foto',
         'email',
     ];

@@ -58,6 +58,7 @@ class DaftarREORController extends Controller
             'nama_ayah' => 'required',
             'pekerjaan_ayah' => 'required',
             'penghasilan_ayah' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'nik.required' => 'NIK Wajib Di Isi',
@@ -86,6 +87,7 @@ class DaftarREORController extends Controller
             'scan_foto_ijazah_terakhir.required' => 'Scan/Foto Ijazah Wajib Diupload',
             'scan_foto_akte.required' => 'Scan/Foto Akte Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Diupload',
+            'edit_foto.required' => 'Edit Foto Wajib Diupload',
         ]);
 
         $data = [
@@ -113,6 +115,7 @@ class DaftarREORController extends Controller
             'kabupaten_kota' => $request->kabupaten_kota,
             'kecamatan' => $request->kecamatan,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -159,6 +162,7 @@ class DaftarREORController extends Controller
             'nama_ayah' => 'required',
             'pekerjaan_ayah' => 'required',
             'penghasilan_ayah' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'nik.required' => 'NIK Wajib Di Isi',
@@ -186,7 +190,8 @@ class DaftarREORController extends Controller
             'scan_foto_npwp.required' => 'Scan/Foto NPWP Wajib Diupload',
             'scan_foto_ijazah_terakhir.required' => 'Scan/Foto Ijazah Wajib Diupload',
             'scan_foto_akte.required' => 'Scan/Foto Akte Wajib Diupload',
-            'alamat.required' => 'Alamat Wajib Diupload',
+            'alamat.required' => 'Alamat Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
         ]);
 
         $data = [
@@ -214,6 +219,7 @@ class DaftarREORController extends Controller
             'kabupaten_kota' => $request->kabupaten_kota,
             'kecamatan' => $request->kecamatan,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -297,6 +303,7 @@ class DaftarREORController extends Controller
             'nama_ayah' => 'required',
             'pekerjaan_ayah' => 'required',
             'penghasilan_ayah' => 'required',
+            'edit_foto' => 'required',
         ], [
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'nik.required' => 'NIK Wajib Di Isi',
@@ -325,6 +332,7 @@ class DaftarREORController extends Controller
             'scan_foto_ijazah_terakhir.required' => 'Scan/Foto Ijazah Wajib Diupload',
             'scan_foto_akte.required' => 'Scan/Foto Akte Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Diupload',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
         ]);
 
         $data = [];
@@ -362,6 +370,7 @@ class DaftarREORController extends Controller
             'kabupaten_kota' => $request->kabupaten_kota,
             'kecamatan' => $request->kecamatan,
             'alamat' => $request->alamat,
+            'edit_foto' => $request->edit_foto,
             'foto' => $data['foto'] ?? $model->foto,
             'scan_foto_ktp' => $data['scan_foto_ktp'] ?? $model->scan_foto_ktp,
             'scan_foto_akte' => $data['scan_foto_akte'] ?? $model->scan_foto_akte,

@@ -30,6 +30,7 @@ class PerpanjangREOR extends Model
         'kelurahan_desa',
         'jenis_kelamin',
         'jenis_sertifikat',
+        'edit_foto',
         'foto',
         'scan_foto_ijazah',
         'scan_foto_npwp',

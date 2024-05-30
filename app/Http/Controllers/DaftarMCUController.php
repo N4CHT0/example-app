@@ -33,6 +33,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap' => 'required',
             'jabatan_diatas_kapal' => 'required',
             'no_telp' => 'required',
+            'edit_foto' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'foto_ktp' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'foto_bst' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -49,6 +50,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'jabatan_diatas_kapal' => $request->jabatan_diatas_kapal,
             'no_telp' => $request->no_telp,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -70,6 +72,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap' => 'required',
             'jabatan_diatas_kapal' => 'required',
             'no_telp' => 'required',
+            'edit_foto' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'foto_ktp' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'foto_bst' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -77,6 +80,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'jabatan_diatas_kapal.required' => 'Jabatan Diatas Kapal Wajib Di Isi',
             'no_telp.required' => 'No Telepon Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'foto_ktp.required' => 'Foto Wajib Diupload',
             'foto_bst.required' => 'Foto Wajib Diupload',
@@ -86,6 +90,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'jabatan_diatas_kapal' => $request->jabatan_diatas_kapal,
             'no_telp' => $request->no_telp,
+            'edit_foto' => $request->edit_foto,
         ];
 
         // Simpan file foto jika ada
@@ -143,6 +148,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap' => 'required',
             'jabatan_diatas_kapal' => 'required',
             'no_telp' => 'required',
+            'edit_foto' => 'required',
             'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
             'foto_ktp' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
             'foto_bst' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:7048',
@@ -150,6 +156,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap.required' => 'Nama Lengkap Wajib Di Isi',
             'jabatan_diatas_kapal.required' => 'Jabatan Diatas Kapal Wajib Di Isi',
             'no_telp.required' => 'Nomor Telepon Wajib Di Isi',
+            'edit_foto.required' => 'Edit Foto Wajib Di Isi',
             'foto.required' => 'Foto Wajib Diupload',
             'foto_ktp.required' => 'Foto Wajib Diupload',
             'foto_bst.required' => 'Foto Wajib Diupload',
@@ -167,6 +174,7 @@ class DaftarMCUController extends Controller
             'nama_lengkap' => $request->nama_lengkap,
             'jabatan_diatas_kapal' => $request->jabatan_diatas_kapal,
             'no_telp' => $request->no_telp,
+            'edit_foto' => $request->edit_foto,
             'foto' => $data['foto'] ?? $model->foto,
             'foto_ktp' => $data['foto_ktp'] ?? $model->foto_ktp,
             'foto_bst' => $data['foto_bst'] ?? $model->foto_bst,

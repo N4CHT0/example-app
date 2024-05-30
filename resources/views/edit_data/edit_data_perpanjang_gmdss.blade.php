@@ -134,9 +134,30 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="edit_foto">Edit Foto</label><br>
+                        <input type="radio" id="edit_foto_ya" name="edit_foto" value="YA"
+                            {{ $data->edit_foto == 'YA' ? 'checked' : '' }} required>
+                        <label for="edit_foto_ya">Ya</label>
+                        <input type="radio" id="edit_foto_tidak" name="edit_foto" value="TIDAK"
+                            {{ $data->edit_foto == 'TIDAK' ? 'checked' : '' }} required>
+                        <label for="edit_foto_tidak">Tidak</label>
+                    </div>
+
+                    <div class="form-group">
                         <label for="foto">Upload Foto</label>
                         <input type="file" class="form-control" id="foto" name="foto"
                             value="{{ $data->foto }}>
+                    </div>
+
+                    <div class="form-group">
+                        <h6 style="font-weight: bold" for="">Note : Ketentuan Foto</h6 style="font-weight: bold">
+                        <h6 style="font-weight: bold" for="">1. Jas Hitam, Kemeja Putih, Dasi Hitam</h6
+                            style="font-weight: bold">
+                        <h6 style="font-weight: bold" for="">2. Apabila Tidak Punya, Melakukan Foto Selfie
+                            Biasa, Terdapat Edit
+                            Foto
+                            Dengan Biaya
+                            Tambahan Rp.50.000</h6 style="font-weight: bold">
                     </div>
 
                     <div class="form-group">

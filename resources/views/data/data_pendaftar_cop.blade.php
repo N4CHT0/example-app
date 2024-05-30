@@ -14,59 +14,62 @@
                         Tambah Data
                     </a>
                 </div>
-                <table id="example" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>ID</th>
-                            <th>Seafare Code</th>
-                            <th>Nama Lengkap</th>
-                            <th>Jenis Sertifikat COP</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Email</th>
-                            <th>No Telp</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $no = 1 @endphp
-                        @foreach ($data as $item)
+                <div class="table-responsive">
+                    <table id="example" class="table table-bordered table-hover">
+                        <thead>
                             <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->seafare_code }}</td>
-                                <td>{{ $item->nama_lengkap }}</td>
-                                <td>{{ $item->jenis_sertifikat_cop }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->no_telp }}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="/report_pendaftar_diklat_cop_pdf/{{ $item->id }}"
-                                            class="btn btn-dark btn-sm">
-                                            <i class="fas fa-file-pdf"></i>
-                                        </a>
-                                        <a href="/data_pendaftar_diklat_cop/show/{{ $item->id }}"
-                                            class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="/data_pendaftar_diklat_cop/edit/{{ $item->id }}"
-                                            class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('DaftarCOP.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th>No</th>
+                                <th>ID</th>
+                                <th>Seafare Code</th>
+                                <th>Nama Lengkap</th>
+                                <th>Jenis Sertifikat COP</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Email</th>
+                                <th>No Telp</th>
+                                <th>Edit Foto</th>
+                                <th>Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @php $no = 1 @endphp
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->seafare_code }}</td>
+                                    <td>{{ $item->nama_lengkap }}</td>
+                                    <td>{{ $item->jenis_sertifikat_cop }}</td>
+                                    <td>{{ $item->jenis_kelamin }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->no_telp }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="/report_pendaftar_diklat_cop_pdf/{{ $item->id }}"
+                                                class="btn btn-dark btn-sm">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
+                                            <a href="/data_pendaftar_diklat_cop/show/{{ $item->id }}"
+                                                class="btn btn-info btn-sm">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="/data_pendaftar_diklat_cop/edit/{{ $item->id }}"
+                                                class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('DaftarCOP.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

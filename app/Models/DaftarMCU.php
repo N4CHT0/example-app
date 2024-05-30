@@ -18,6 +18,7 @@ class DaftarMCU extends Model
         'nama_lengkap',
         'jabatan_diatas_kapal',
         'no_telp',
+        'edit_foto',
         'foto',
         'foto_ktp',
         'foto_bst',

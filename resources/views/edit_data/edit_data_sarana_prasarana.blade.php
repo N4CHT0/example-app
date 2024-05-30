@@ -10,9 +10,15 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="jenis_fasilitas">Jenis Fasilitas:</label>
-                        <input type="text" class="form-control" id="jenis_fasilitas" name="jenis_fasilitas"
-                            value="{{ $data->jenis_fasilitas }}" required>
+                        <label for="jenis_fasilitas">Jenis Fasilitas</label>
+                        <select class="form-control" id="jenis_fasilitas" name="jenis_fasilitas" required>
+                            <!-- Pilihan role sesuai dengan kebutuhan -->
+                            <option value="PRASARANA" {{ $data->jenis_fasilitas == 'PRASARANA' ? 'selected' : '' }}>
+                                PRASARANA
+                            </option>
+                            <option value="SARANA" {{ $data->jenis_fasilitas == 'SARANA' ? 'selected' : '' }}>SARANA
+                            </option>
+                        </select>
                     </div>
 
                     <div class="form-group">

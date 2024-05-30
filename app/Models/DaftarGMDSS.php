@@ -31,6 +31,7 @@ class DaftarGMDSS extends Model
         'kelurahan_desa',
         'kode_pos',
         'nama_ibu_kandung',
+        'edit_foto',
         'foto',
         'email',
     ];

@@ -31,48 +31,75 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @php $no = 1 @endphp
-                            @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->seafare_code }}</td>
-                                    <td>{{ $item->nama_lengkap }}</td>
-                                    <td>{{ $item->nik }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->no_telp }}</td>
-                                    <td>{{ $item->edit_foto }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="/report_pendaftar_diklat_gmdss_pdf/{{ $item->id }}"
-                                                class="btn btn-dark btn-sm">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </a>
-                                            <a href="/data_pendaftar_diklat_gmdss/show/{{ $item->id }}"
-                                                class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="/data_pendaftar_diklat_gmdss/edit/{{ $item->id }}"
-                                                class="btn btn-warning btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form action="{{ route('DaftarGMDSS.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('DaftarGMDSS.index') !!}',
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'seafare_code',
+                        name: 'seafare_code'
+                    },
+                    {
+                        data: 'nama_lengkap',
+                        name: 'nama_lengkap'
+                    },
+                    {
+                        data: 'nik',
+                        name: 'nik'
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'no_telp',
+                        name: 'no_telp'
+                    },
+                    {
+                        data: 'edit_foto',
+                        name: 'edit_foto'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                order: [
+                    [1, 'asc']
+                ],
+                columnDefs: [{
+                    targets: 0,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                }]
+            });
+        });
+    </script>
 @endsection

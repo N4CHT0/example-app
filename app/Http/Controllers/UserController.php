@@ -38,13 +38,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validasi = Validator::make($request->all(), [
+            'id' => 'required',
             'nama_lengkap' => 'required',
             'email' => 'required',
             'password' => 'required',
             'jenis_akun' => 'required',
             'jenis_diklat' => 'required',
         ], [
-            'nama_lengkap.required' => 'Jenis Fasilitas wajib diisi',
+            'id.required' => 'NIK/NIP Wajib Di Isi',
+            'nama_lengkap.required' => 'Jenis Fasilitas Wajib diisi',
             'email.required' => 'Nama Fasilitas wajib diisi',
             'password.required' => 'Password wajib diisi',
             'jenis_akun.required' => 'Jenis Akun wajib diisi',
@@ -52,6 +54,7 @@ class UserController extends Controller
         ]);
 
         $data = [
+            'id' => $request->id,
             'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -109,12 +112,14 @@ class UserController extends Controller
         }
 
         $validasi = Validator::make($request->all(), [
+            'id' => 'required',
             'nama_lengkap' => 'required',
             'email' => 'required',
             'password' => 'required',
             'jenis_akun' => 'required',
             'jenis_diklat' => 'required',
         ], [
+            'id.required' => 'NIP/NIK wajib diisi',
             'nama_lengkap.required' => 'Jenis Fasilitas wajib diisi',
             'email.required' => 'Nama Fasilitas wajib diisi',
             'password.required' => 'Password wajib diisi',
@@ -125,6 +130,7 @@ class UserController extends Controller
         $data = [];
         // Update data
         $model->update([
+            'id' => $request->id,
             'nama_lengkap' => $request->nama_lengkap,
             'email' => $request->email,
             'password' => Hash::make($request->password),

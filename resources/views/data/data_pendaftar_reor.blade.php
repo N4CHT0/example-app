@@ -11,7 +11,7 @@
                     <a href="{{ route('CetakData.Pendaftar_Diklat_REOR') }}" class="btn btn-danger d-flex align-items-center">
                         Cetak Data
                     </a>
-                    <a href="{{ route('pendaftaran.reor_create') }}" class="btn btn-success ms-2 d-flex align-items-center">
+                    <a href="{{ route('pendaftaran.cop_create') }}" class="btn btn-success ms-2 d-flex align-items-center">
                         Tambah Data
                     </a>
                 </div>
@@ -31,48 +31,74 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @php $no = 1 @endphp
-                            @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->pilihan_diklat }}</td>
-                                    <td>{{ $item->periode_ujian_negara }}</td>
-                                    <td>{{ $item->nik }}</td>
-                                    <td>{{ $item->npwp }}</td>
-                                    <td>{{ $item->nama_lengkap }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->edit_foto }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="/report_pendaftar_diklat_reor_pdf/{{ $item->id }}"
-                                                class="btn btn-dark btn-sm">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </a>
-                                            <a href="/data_pendaftar_diklat_reor/show/{{ $item->id }}"
-                                                class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="/data_pendaftar_diklat_reor/edit/{{ $item->id }}"
-                                                class="btn btn-warning btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form action="{{ route('DaftarREOR.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('DaftarREOR.index') !!}',
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'pilihan_diklat',
+                        name: 'pilihan_diklat'
+                    },
+                    {
+                        data: 'periode_ujian_negara',
+                        name: 'periode_ujian_negara'
+                    },
+                    {
+                        data: 'nik',
+                        name: 'nik'
+                    },
+                    {
+                        data: 'npwp',
+                        name: 'npwp'
+                    },
+                    {
+                        data: 'nama_lengkap',
+                        name: 'nama_lengkap'
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin'
+                    },
+                    {
+                        data: 'edit_foto',
+                        name: 'edit_foto'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                order: [
+                    [1, 'asc']
+                ],
+                columnDefs: [{
+                    targets: 0,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                }]
+            });
+        });
+    </script>
 @endsection

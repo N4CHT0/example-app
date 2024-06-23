@@ -137,7 +137,7 @@
                     <td>
                         <p><span class="label">TA</span> : {{ $data->tanggal_pembayaran }}</p>
                         <p><span class="label">Nomor Bukti</span> : {{ $data->nomor_bukti }}</p>
-                        <p><span class="label">Sudah Terima Dari</span> : {{ $data->nama }}</p>
+                        <p><span class="label">Sudah Terima Dari</span> : {{ $data->user->nama_lengkap }}</p>
                         <p><span class="label">Jumlah Uang</span> : {{ $data->jumlah_uang }}</p>
                         <p><span class="label">Terbilang</span> : {{ terbilang($data->jumlah_uang) }} Rupiah</p>
                         <p><span class="label">Untuk Pembayaran</span> : {{ $data->berita_pembayaran }}</p>
@@ -149,8 +149,8 @@
         </div>
 
         <div class="signature">
-            <p>Surabaya, 2024</p>
-            <p>M Eri Kusyairi</p>
+            <p>Surabaya, {{ $currentDate }}</p>
+            <p>Mey Prayogo Radi Putro, S.Kom.</p>
         </div>
 
         <div class="qr-code">

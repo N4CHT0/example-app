@@ -19,7 +19,6 @@ class Admin
         if (Auth::user()->jenis_akun != 'admin') {
             return redirect('/');
         }
-
         return $next($request);
     }
 }

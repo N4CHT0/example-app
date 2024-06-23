@@ -4,7 +4,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>53</h3>
+                <h3>{{ $totalPegawai }}</h3>
 
                 <p>Jumlah Pegawai</p>
             </div>
@@ -18,7 +18,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>53</h3>
+                <h3>{{ $totalPengajar }}</h3>
 
                 <p>Jumlah Pengajar</p>
             </div>
@@ -32,7 +32,7 @@
         <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
-                <h3>53</h3>
+                <h3>{{ $totalSiswa }}</h3>
 
                 <p>Jumlah Siswa</p>
             </div>

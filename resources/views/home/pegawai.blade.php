@@ -20,31 +20,31 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nama">Nama:</label>
-                                    <span class="detail-value" id="nama">Hannes Tigor Hamonangan Sinaga</span>
+                                    <span class="detail-value" id="nama">{{ Auth::user()->nama_lengkap }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama2">NIK:</label>
-                                    <span class="detail-value" id="nama2">36124100280001</span>
+                                    <label for="nama2">NIP:</label>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->id }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama2">Tempat Lahir:</label>
-                                    <span class="detail-value" id="nama2">Surabaya</span>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->tempat_lahir }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama2">Tanggal Lahir:</label>
-                                    <span class="detail-value" id="nama2">24-10-2002</span>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->tanggal_lahir }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama2">Agama:</label>
-                                    <span class="detail-value" id="nama2">Kristen</span>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->agama }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama2">Email:</label>
-                                    <span class="detail-value" id="nama2">hannessinaga77@gmail.com</span>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->email }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama2">No Telp:</label>
-                                    <span class="detail-value" id="nama2">082334554929</span>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->no_telp }}</span>
                                 </div>
                             </div>
                         </div>

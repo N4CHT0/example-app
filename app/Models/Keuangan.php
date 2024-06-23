@@ -13,11 +13,20 @@ class Keuangan extends Model
     protected $fillable = [
         'id',
         'tanggal_pembayaran',
+        'periode_pembayaran',
         'nomor_bukti',
-        'nama',
+        'nomor_tagihan',
+        'id_user',
         'berita_pembayaran',
         'status_pembayaran',
         'jumlah_uang',
+        'total_tagihan',
         'petugas',
+        'data_pembayaran',
+        'keterangan',
     ];
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

@@ -1,17 +1,18 @@
-@extends('pendaftaran.layout_daftar')
+@extends('layouts.main')
 @section('content')
     <div class="col-12">
         <div class="card">
             <div class="card-body justify-content-between">
                 <h5>Pendaftaran Sertifikat MCU</h5>
                 <div class="card-body">
-                    <form action="{{ route('DaftarMCU.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('pendaftaran.storeDiklat', ['jenisDiklat' => 'mcu']) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <br>
                         <div class="form-group">
                             <label for="nama_lengkap">Nama Lengkap</label>
                             <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
-                                autocomplete="name" required>
+                                value="{{ Auth::user()->nama_lengkap }}" required>
                         </div>
                         <br>
                         <div class="form-group">
@@ -22,8 +23,8 @@
                         <br>
                         <div class="form-group">
                             <label for="no_telp">No Telp</label>
-                            <input type="text" class="form-control" id="no_telp" name="no_telp" autocomplete="tel"
-                                required>
+                            <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                value="{{ Auth::user()->no_telp }}" required>
                         </div>
                         <br>
                         <div class="form-group">

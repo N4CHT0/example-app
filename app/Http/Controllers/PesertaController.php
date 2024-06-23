@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use App\Models\AbsensiSiswa;
+use App\Models\Keuangan;
 use App\Models\MataPelajaran;
 use App\Models\NilaiUjianLokal;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -39,6 +41,24 @@ class PesertaController extends Controller
         $statusList = AbsensiSiswa::pluck('status', 'status')->unique();
 
         return view('show_data.show_data_peserta_absensi', compact('data', 'mataPelajaranList', 'pertemuanList', 'statusList'));
+    }
+
+    public function Keuangan(Request $request)
+    {
+        $user = auth()->user(); // Mendapatkan user yang sedang login
+        $query = Keuangan::whereHas('User', function ($q) use ($user) {
+            $q->where('id_user', $user->id); // Menghubungkan dengan user yang sedang login
+        });
+
+        if ($request->filled('data_pembayaran')) {
+            $query->where('data_pembayaran', $request->data_pembayaran);
+        }
+
+        $data = $query->get();
+
+        // Data untuk dropdown filter
+        $keuanganList = Keuangan::pluck('data_pembayaran', 'data_pembayaran')->unique();
+        return view('data.data_histori_keuangan', compact('data', 'keuanganList'));
     }
 
     public function Nilai(Request $request)
@@ -81,7 +101,16 @@ class PesertaController extends Controller
 
         $user->save();
 
-        return redirect()->route('Dashboard.Siswa')->with('status', 'profile-updated');
+        // Redirect berdasarkan nilai dari jenis_akun
+        if ($user->jenis_akun === 'pendaftar') {
+            return redirect()->route('Dashboard.Pendaftar')->with('status', 'profile-updated');
+        } elseif ($user->jenis_akun === 'siswa') {
+            return redirect()->route('Dashboard.Siswa')->with('status', 'profile-updated');
+        } elseif ($user->jenis_akun === 'admin') {
+            return redirect()->route('Dashboard.Pegawai')->with('status', 'profile-updated');
+        } elseif ($user->jenis_akun === 'pengajar') {
+            return redirect()->route('Dashboard.Pengajar')->with('status', 'profile-updated');
+        }
     }
 
     /**

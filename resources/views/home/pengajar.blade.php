@@ -33,8 +33,8 @@
                                     <span class="detail-value" id="nama">{{ Auth::user()->nama_lengkap }}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama2">NIK:</label>
-                                    <span class="detail-value" id="nama2">36124100280001</span>
+                                    <label for="nama2">NIP:</label>
+                                    <span class="detail-value" id="nama2">{{ Auth::user()->id }}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama2">Tempat Lahir:</label>

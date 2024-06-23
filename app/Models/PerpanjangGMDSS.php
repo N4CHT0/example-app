@@ -31,6 +31,7 @@ class PerpanjangGMDSS extends Model
         'kelurahan_desa',
         'kode_pos',
         'jenis_kelamin',
+        'jenis_perpanjang',
         'status',
         'nama_ibu_kandung',
         'nama_ayah_kandung',

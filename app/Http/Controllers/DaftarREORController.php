@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class DaftarREORController extends Controller
@@ -18,11 +19,37 @@ class DaftarREORController extends Controller
      */
     public function index()
     {
-        $data = DaftarREOR::paginate(100);
+        if (request()->ajax()) {
+            $data = DaftarREOR::select(['id', 'pilihan_diklat', 'periode_ujian_negara', 'nik', 'npwp', 'nama_lengkap', 'jenis_kelamin', 'edit_foto']);
+            return DataTables::of($data)
+                ->addColumn('edit_foto', function ($row) {
+                    return $row->edit_foto;
+                })
+                ->addColumn('aksi', function ($row) {
+                    $btn = '<div class="btn-group">
+                                <a href="/report_pendaftar_diklat_reor_pdf/' . $row->id . '" class="btn btn-dark btn-sm">
+                                    <i class="fas fa-file-pdf"></i>
+                                </a>
+                                <a href="/data_pendaftar_diklat_reor/show/' . $row->id . '" class="btn btn-info btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="/data_pendaftar_diklat_reor/edit/' . $row->id . '" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="' . route('DaftarREOR.destroy', $row->id) . '" method="POST" style="display:inline;">
+                                    ' . csrf_field() . method_field('DELETE') . '
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>';
+                    return $btn;
+                })
+                ->rawColumns(['edit_foto', 'aksi'])
+                ->make(true);
+        }
 
-        return view('data.data_pendaftar_reor', [
-            'data' => $data,
-        ]);
+        return view('data.data_pendaftar_reor');
     }
 
     /**
@@ -47,6 +74,7 @@ class DaftarREORController extends Controller
             'kabupaten_kota' => 'required',
             'kecamatan' => 'required',
             'foto' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
+            'scan_sertifikat_sou' => 'required|files|mimes:pdf|max:7080',
             'scan_foto_akte' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ktp' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ijazah_terakhir' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -84,6 +112,7 @@ class DaftarREORController extends Controller
             'foto.required' => 'Foto Wajib Diupload',
             'scan_foto_ktp.required' => 'Scan/Foto KTP Wajib Diupload',
             'scan_foto_npwp.required' => 'Scan/Foto NPWP Wajib Diupload',
+            'scan_sertifikat_sou.required' => 'Sertifikat SOU/ORU Wajib Diupload',
             'scan_foto_ijazah_terakhir.required' => 'Scan/Foto Ijazah Wajib Diupload',
             'scan_foto_akte.required' => 'Scan/Foto Akte Wajib Diupload',
             'alamat.required' => 'Alamat Wajib Diupload',
@@ -124,6 +153,7 @@ class DaftarREORController extends Controller
         $this->processImageUpload($request, 'scan_foto_akte', $data);
         $this->processImageUpload($request, 'scan_foto_ijazah_terakhir', $data);
         $this->processImageUpload($request, 'scan_foto_npwp', $data);
+        $this->processImageUpload($request, 'scan_sertifikat_sou', $data);
 
         DaftarREOR::create($data);
         return redirect()->route('DaftarREOR.index')->with('success', 'Data Telah Tersimpan');
@@ -151,6 +181,7 @@ class DaftarREORController extends Controller
             'kabupaten_kota' => 'required',
             'kecamatan' => 'required',
             'foto' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
+            'scan_sertifikat_sou' => 'required|files|mimes:pdf|max:7080',
             'scan_foto_akte' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ktp' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ijazah_terakhir' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -228,9 +259,10 @@ class DaftarREORController extends Controller
         $this->processImageUpload($request, 'scan_foto_akte', $data);
         $this->processImageUpload($request, 'scan_foto_ijazah_terakhir', $data);
         $this->processImageUpload($request, 'scan_foto_npwp', $data);
+        $this->processImageUpload($request, 'scan_sertifikat_sou', $data);
 
         DaftarREOR::create($data);
-        return redirect()->route('Home')->with('success', 'Data Telah Tersimpan, Terimakasih Harap Menunggu Kami Akan Melakukan Pengecekan Terhadap Data Dan Akan Menghubungi Anda Di Nomor Telepon Yang Terkait Agar Dapat Melanjutkan Ke Sistem');
+        return redirect()->route('Pendaftar.Diklat')->with('success', 'Data Telah Tersimpan, Terimakasih Harap Menunggu Kami Akan Melakukan Pengecekan Terhadap Data Dan Akan Menghubungi Anda Di Nomor Telepon Yang Terkait Agar Dapat Melanjutkan Ke Sistem');
     }
 
     /**
@@ -291,6 +323,7 @@ class DaftarREORController extends Controller
             'provinsi' => 'required',
             'kabupaten_kota' => 'required',
             'kecamatan' => 'required',
+            'scan_sertifikat_sou' => 'required|files|mimes:pdf|max:7080',
             'foto' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_akte' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
             'scan_foto_ktp' => 'required|files|mimes:jpeg,png,jpg,gif,svg|max:7080',
@@ -343,6 +376,7 @@ class DaftarREORController extends Controller
         $this->processImageUpload($request, 'scan_foto_akte', $data, $model);
         $this->processImageUpload($request, 'scan_foto_ijazah_terakhir', $data, $model);
         $this->processImageUpload($request, 'scan_foto_npwp', $data, $model);
+        $this->processImageUpload($request, 'scab_sertifikat_sou', $data, $model);
 
         // Update data
         $model->update([
@@ -376,6 +410,7 @@ class DaftarREORController extends Controller
             'scan_foto_akte' => $data['scan_foto_akte'] ?? $model->scan_foto_akte,
             'scan_foto_ijazah_terakhir' => $data['scan_foto_ijazah_terakhir'] ?? $model->scan_foto_ijazah_terakhir,
             'scan_foto_npwp' => $data['scan_foto_npwp'] ?? $model->scan_foto_npwp,
+            'scan_foto_npwp' => $data['scan_sertifikat_sou'] ?? $model->scan_sertifikat_sou,
         ]);
 
         return redirect()->route('DaftarREOR.index')->with('success', 'Data Telah Diperbarui, Terimakasih Harap Menunggu Kami Akan Melakukan Pengecekan Terhadap Data Dan Akan Menghubungi Anda Di Nomor Telepon Yang Terkait Agar Dapat Melanjutkan Ke Sistem');
@@ -402,7 +437,7 @@ class DaftarREORController extends Controller
 
     private function deleteRelatedFiles($data)
     {
-        $fileFields = ['foto', 'scan_foto_ktp', 'scan_foto_akte', 'scan_foto_ijazah'];
+        $fileFields = ['foto', 'scan_foto_ktp', 'scan_foto_akte', 'scan_foto_ijazah', 'scan_sertifikat_sou'];
 
         foreach ($fileFields as $fieldName) {
             if ($data->$fieldName) {

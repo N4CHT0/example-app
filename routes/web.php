@@ -14,6 +14,7 @@ use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\NilaiUjianLokalController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\PerpanjangGMDSSController;
 use App\Http\Controllers\PerpanjangREORController;
@@ -26,10 +27,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard_', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -41,32 +38,43 @@ require __DIR__ . '/auth.php';
 
 // LANDING PAGE
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 })->name('Home');
 
 // HOMEPAGE
-Route::get('/home/admin', [HomeController::class, 'admin'])->middleware(['auth', 'admin'])->name('Dashboard.Admin');
-Route::get('/home/siswa', [HomeController::class, 'siswa'])->middleware(['auth', 'siswa'])->name('Dashboard.Siswa');
-Route::get('/home/pegawai', [HomeController::class, 'pegawai'])->middleware(['auth', 'pegawai'])->name('Dashboard.Pegawai');
-Route::get('/home/pengajar', [HomeController::class, 'pengajar'])->middleware(['auth', 'pengajar'])->name('Dashboard.Pengajar');
+Route::get('/home/admin', [HomeController::class, 'admin'])->middleware(['auth', 'verified', 'super_admin'])->name('Dashboard.Admin');
+Route::get('/home/siswa', [HomeController::class, 'siswa'])->middleware(['auth', 'verified', 'siswa'])->name('Dashboard.Siswa');
+Route::get('/home/pegawai', [HomeController::class, 'pegawai'])->middleware(['auth', 'verified', 'admin'])->name('Dashboard.Pegawai');
+Route::get('/home/pengajar', [HomeController::class, 'pengajar'])->middleware(['auth', 'verified', 'pengajar'])->name('Dashboard.Pengajar');
+Route::get('/home/pendaftar', [HomeController::class, 'pendaftar'])->middleware(['auth', 'verified', 'pendaftar'])->name('Dashboard.Pendaftar');
 
 // DASHBOARD SISWA/PESERTA
 Route::get('/absensi', [PesertaController::class, 'Absensi'])->name('Peserta.Absensi');
+Route::get('/keuangan_siswa', [PesertaController::class, 'Keuangan'])->name('Peserta.Keuangan');
+Route::get('/keuangan_siswa{id}', [PesertaController::class, 'showKeuangan'])->name('Peserta.show');
 Route::get('/nilai', [PesertaController::class, 'Nilai'])->name('Peserta.Nilai');
 Route::get('/edit/{user}', [PesertaController::class, 'Edit'])->name('Peserta.Edit');
 Route::put('/update/{user}', [PesertaController::class, 'update'])->name('Peserta.Update');
+Route::get('/layanan/{jenis_diklat}', [PendaftaranController::class, 'handleDiklatAll'])->name('pendaftaran.jenis');
+
+// PENDAFTARAN
+Route::get('/diklat', [PendaftaranController::class, 'diklat'])->name('Pendaftar.Diklat');
+Route::get('/pendaftaran/{jenis_diklat}', [PendaftaranController::class, 'handleDiklat']);
+Route::get('/getRegencies/{province_id}', [PendaftaranController::class, 'getRegencies']);
+Route::get('/getDistricts/{regency_id}', [PendaftaranController::class, 'getDistricts']);
+Route::get('/getVillages/{district_id}', [PendaftaranController::class, 'getVillages']);
+Route::post('/pendaftaran/{jenisDiklat}', [PendaftaranController::class, 'storeDiklat'])->name('pendaftaran.storeDiklat');
+Route::get('/cetak-invoice', [PendaftaranController::class, 'cetakInvoice'])->name('Cetak.Invoice');
+Route::post('/upload-bukti-pembayaran', [PendaftaranController::class, 'uploadBuktiPembayaran'])->name('Upload.Bukti');
 
 
 // PENDAFTARAN DIKLAT REOR
 Route::get('/report_pendaftar_diklat_reor_all', [DaftarREORController::class, 'exportAllExcel'])->name('CetakData.Pendaftar_Diklat_REOR');
 Route::get('/report_pendaftar_diklat_reor_pdf/{id}', [DaftarREORController::class, 'exportPDF'])->name('CetakDataPDF.Pendaftar_Diklat_REOR');
-Route::get('/pendaftaran_diklat_reor', function () {
-    return view('pendaftaran.reor_daftar');
-})->name('pendaftaran.reor_daftar');
 Route::post('/pendaftaran_diklat_reor', [DaftarREORController::class, 'store'])->name('DaftarREOR.store');
 Route::get('/data_pendaftar_diklat_reor/create', function () {
-    return view('create_data.create_data_pendaftar_reor');
-})->name('pendaftaran.reor_create');
+    return view('pendaftaran.reor_daftar');
+})->name('pendaftaran.reor_daftar');
 Route::get('/data_pendaftar_diklat_reor', [DaftarREORController::class, 'index'])->name('DaftarREOR.index');
 Route::post('/data_pendaftar_diklat_reor/', [DaftarREORController::class, 'create'])->name('DaftarREOR.create');
 Route::get('/data_pendaftar_diklat_reor/show/{id}', [DaftarREORController::class, 'show'])->name('DaftarREOR.show');
@@ -167,14 +175,22 @@ Route::delete('data_perpanjang_sertifikat_gmdss/delete/{id}', [PerpanjangGMDSSCo
 
 // KEUANGAN
 Route::get('/report_data_keuangan_all', [KeuanganController::class, 'exportAllExcel'])->name('CetakData.Keuangan');
+Route::get('/report_data_invoice_all', [KeuanganController::class, 'exportTagihanAllExcel'])->name('CetakData.Invoice');
 Route::get('/report_keuangan_pdf/{id}', [KeuanganController::class, 'exportPDF'])->name('CetakDataPDF.Keuangan');
+Route::get('/cetak-invoice/{id}', [KeuanganController::class, 'cetakInvoicePDF'])->name('CetakInvoice.Keuangan');
 Route::get('/keuangan', [KeuanganController::class, 'index'])->name('Keuangan.index');
+Route::get('/tagihan', [KeuanganController::class, 'tagihan'])->name('Keuangan.tagihan');
 Route::get('/keuangan/create', [KeuanganController::class, 'create'])->name('Keuangan.create');
 Route::post('/keuangan', [KeuanganController::class, 'store'])->name('Keuangan.store');
 Route::get('/keuangan/show/{id}', [KeuanganController::class, 'show'])->name('Keuangan.show');
 Route::get('/keuangan/edit/{id}', [KeuanganController::class, 'edit'])->name('Keuangan.edit');
 Route::put('/keuangan/update/{id}', [KeuanganController::class, 'update'])->name('Keuangan.update');
 Route::delete('keuangan/delete/{id}', [KeuanganController::class, 'destroy'])->name('Keuangan.destroy');
+Route::post('/keuangan/validasi-akun/{id}', [KeuanganController::class, 'ValidasiAkun'])->name('Keuangan.ValidasiAkun');
+Route::post('/keuangan/terima-pembayaran/{id}', [KeuanganController::class, 'TerimaPembayaran'])->name('Keuangan.TerimaPembayaran');
+Route::post('/keuangan/tolak-pembayaran/{id}', [KeuanganController::class, 'TolakPembayaran'])->name('Keuangan.TolakPembayaran');
+Route::post('/keuangan/tolak-validasi/{id}', [KeuanganController::class, 'TolakValidasi'])->name('Keuangan.TolakValidasi');
+
 
 
 // INVENTORY SERTIFIKAT

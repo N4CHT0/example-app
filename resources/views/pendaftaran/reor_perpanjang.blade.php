@@ -1,11 +1,12 @@
-@extends('pendaftaran.layout_daftar')
+@extends('layouts.main')
 @section('content')
     <div class="col-12">
         <div class="card">
             <div class="card-body justify-content-between">
                 <h5>Pendaftaran Perpanjangan Sertifikat REOR</h5>
                 <div class="card-body">
-                    <form action="{{ route('PerpanjangREOR.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('pendaftaran.storeDiklat', ['jenisDiklat' => 'perpanjang_reor']) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <br>
                         <div class="form-group">
@@ -63,27 +64,47 @@
                         <br>
                         <div class="form-group">
                             <label for="agama">Agama</label>
-                            <input type="text" class="form-control" id="agama" name="agama" required>
+                            <select class="form-control" id="agama" name="agama" required>
+                                <!-- Pilihan role sesuai dengan kebutuhan -->
+                                <option value="ISLAM">ISLAM</option>
+                                <option value="KRISTEN">KRISTEN</option>
+                                <option value="KATHOLIK">KATHOLIK</option>
+                                <option value="HINDU">HINDU</option>
+                                <option value="BUDHA">BUDHA</option>
+                                <option value="KHONGHUCU">KHONGHUCU</option>
+                                <!-- Tambahkan pilihan lain jika diperlukan -->
+                            </select>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="provinsi">Provinsi</label>
-                            <input type="text" class="form-control" id="provinsi" name="provinsi" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="kecamatan">Kecamatan</label>
-                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" required>
+                            <select class="form-control" name="provinsi" id="provinsi">
+                                <option value="">Pilih Provinsi...</option>
+                                @foreach ($provinsi as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="kabupaten_kota">Kabupaten/Kota</label>
-                            <input type="text" class="form-control" id="kabupaten_kota" name="kabupaten_kota" required>
+                            <select class="form-control" name="kabupaten_kota" id="kabupaten_kota">
+                                <option value="Pilih Kabupaten/Kota..."></option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="kecamatan">Kecamatan</label>
+                            <select class="form-control" name="kecamatan" id="kecamatan">
+                                <option value="Pilih Kecamatan..."></option>
+                            </select>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="kelurahan_desa">Kelurahan/Desa</label>
-                            <input type="text" class="form-control" id="kelurahan_desa" name="kelurahan_desa" required>
+                            <select class="form-control" name="kelurahan_desa" id="kelurahan_desa">
+                                <option value="Pilih Kelurahan/Desa..."></option>
+                            </select>
                         </div>
                         <br>
                         <div class="form-group">
@@ -105,8 +126,7 @@
                             <h6 style="font-weight: bold" for="">1. Jas Hitam, Kemeja Putih, Dasi Hitam</h6
                                 style="font-weight: bold">
                             <h6 style="font-weight: bold" for="">2. Apabila Tidak Punya, Melakukan Foto Selfie
-                                Biasa, Terdapat Edit
-                                Foto
+                                Biasa, Terdapat Edit Foto
                                 Dengan Biaya
                                 Tambahan Rp.50.000</h6 style="font-weight: bold">
                         </div>
@@ -132,16 +152,14 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                autocomplete="email" required>
+                                value="{{ Auth::user()->email }}" required>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="jenis_kelamin">Jenis Kelamin</label>
                             <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                                <!-- Pilihan role sesuai dengan kebutuhan -->
-                                <option value="Laki - Laki">Laki - Laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                                <!-- Tambahkan pilihan lain jika diperlukan -->
+                                <option value="LAKI-LAKI">LAKI-LAKI</option>
+                                <option value="PEREMPUAN">PEREMPUAN</option>
                             </select>
                         </div>
                         <br>
@@ -153,4 +171,53 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('provinsi').addEventListener('change', function() {
+            var provinceId = this.value;
+            fetch(`/getRegencies/${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var kabupatenSelect = document.getElementById('kabupaten_kota');
+                    kabupatenSelect.innerHTML = '<option value="">Pilih Kabupaten/Kota...</option>';
+                    data.forEach(function(kabupaten) {
+                        var option = document.createElement('option');
+                        option.value = kabupaten.id;
+                        option.text = kabupaten.name;
+                        kabupatenSelect.appendChild(option);
+                    });
+                });
+        });
+
+        document.getElementById('kabupaten_kota').addEventListener('change', function() {
+            var regencyId = this.value;
+            fetch(`/getDistricts/${regencyId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var kecamatanSelect = document.getElementById('kecamatan');
+                    kecamatanSelect.innerHTML = '<option value="">Pilih Kecamatan...</option>';
+                    data.forEach(function(kecamatan) {
+                        var option = document.createElement('option');
+                        option.value = kecamatan.id;
+                        option.text = kecamatan.name;
+                        kecamatanSelect.appendChild(option);
+                    });
+                });
+        });
+
+        document.getElementById('kecamatan').addEventListener('change', function() {
+            var districtId = this.value;
+            fetch(`/getVillages/${districtId}`)
+                .then(response => response.json())
+                .then(data => {
+                    var kelurahanDesaSelect = document.getElementById('kelurahan_desa');
+                    kelurahanDesaSelect.innerHTML = '<option value="">Pilih Kelurahan/Desa...</option>';
+                    data.forEach(function(kelurahanDesa) {
+                        var option = document.createElement('option');
+                        option.value = kelurahanDesa.id;
+                        option.text = kelurahanDesa.name;
+                        kelurahanDesaSelect.appendChild(option);
+                    });
+                });
+        });
+    </script>
 @endsection

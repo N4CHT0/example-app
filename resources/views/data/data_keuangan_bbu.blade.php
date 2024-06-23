@@ -3,7 +3,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="card-title">Data Keuangan BBU</h3>
+                <h3 class="card-title">Data Kwitansi</h3>
             </div>
             <div class="card-body">
                 <div class="btn-group mb-3 justify-content-between">
@@ -11,7 +11,7 @@
                         Cetak Data
                     </a>
                     <a href="{{ route('Keuangan.create') }}" class="btn btn-success ms-2 d-flex align-items-center">
-                        Tambah Data
+                        Buat Kwitansi
                     </a>
                 </div>
                 <div class="table-responsive">
@@ -19,7 +19,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>ID</th>
+                                <th>NIK</th>
                                 <th>Nama</th>
                                 <th>Berita Pembayaran</th>
                                 <th>Status Pembayaran</th>
@@ -28,43 +28,67 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @php $no = 1 @endphp
-                            @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->berita_pembayaran }}</td>
-                                    <td>{{ $item->status_pembayaran }}</td>
-                                    <td>{{ $item->tanggal_pembayaran }}</td>
-                                    <td>{{ $item->petugas }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a href="/report_keuangan_pdf/{{ $item->id }}" class="btn btn-dark btn-sm">
-                                                <i class="fas fa-file-pdf"></i>
-                                            </a>
-                                            <a href="keuangan/show/{{ $item->id }}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="/keuangan/edit/{{ $item->id }}" class="btn btn-warning btn-sm">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form action="{{ route('Keuangan.destroy', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('Keuangan.index') !!}',
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'id_user',
+                        name: 'id_user'
+                    },
+                    {
+                        data: 'nama_lengkap',
+                        name: 'nama_lengkap'
+                    },
+                    {
+                        data: 'berita_pembayaran',
+                        name: 'berita_pembayaran'
+                    },
+                    {
+                        data: 'status_pembayaran',
+                        name: 'status_pembayaran'
+                    },
+                    {
+                        data: 'tanggal_pembayaran',
+                        name: 'tanggal_pembayaran'
+                    },
+                    {
+                        data: 'petugas',
+                        name: 'petugas'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                order: [
+                    [1, 'asc']
+                ],
+                columnDefs: [{
+                    targets: 0,
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                }]
+            });
+        });
+    </script>
 @endsection

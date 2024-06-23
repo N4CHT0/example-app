@@ -29,6 +29,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat"
+                            value="{{ $user->alamat }}"">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="agama">Agama</label>
+                        <input type="text" class="form-control" id="agama" name="agama"
+                            value="{{ $user->agama }}"">
+                    </div>
+
+                    <div class="form-group">
                         <label for="no_telp">No Telp</label>
                         <input type="text" class="form-control" id="no_telp" name="no_telp" autocomplete="tel"
                             value="{{ $user->no_telp }}"required>

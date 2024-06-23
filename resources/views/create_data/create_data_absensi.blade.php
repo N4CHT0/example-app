@@ -32,7 +32,7 @@
                         <select class="form-control" id="status" name="status" required>
                             <option value="Hadir">Hadir</option>
                             <option value="Izin">Izin</option>
-                            <option value="Tidak Hadir">Tidak Hadir</option>
+                            <option value="Alpha">Alpha</option>
                         </select>
                     </div>
 

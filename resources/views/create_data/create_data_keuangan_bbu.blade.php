@@ -16,9 +16,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" autocomplete="name"
-                            required>
+                        <label for="id_user">Nama Lengkap</label>
+                        <input type="hidden" id="id_user" name="id_user">
+                        <input type="text" class="form-control" id="nama_lengkap" placeholder="Cari nama lengkap"
+                            autocomplete="off">
+                        <div id="nama_lengkap_dropdown"></div>
                     </div>
 
                     <div class="form-group">
@@ -37,6 +39,8 @@
                             <option value="Pembayaran Pendaftaran Diklat REOR">Pembayaran Pendaftaran Diklat REOR</option>
                             <option value="Pembayaran Pendaftaran Diklat COP">Pembayaran Pendaftaran Diklat COP</option>
                             <option value="Pembayaran Pendaftaran Diklat GMDSS">Pembayaran Pendaftaran Diklat GMDSS</option>
+                            <option value="Pembayaran Pendaftaran Diklat GMDSS">Pembayaran Pendaftaran Diklat GMDSS +
+                                SOU/ORU</option>
                             <option value="Pembayaran Pendaftaran Sertifikat MCU">Pembayaran Pendaftaran Sertifikat MCU
                             </option>
                             <option value="Pembayaran Perpanjangan Sertifikat GMDSS">Pembayaran Perpanjangan Sertifikat
@@ -44,6 +48,10 @@
                             </option>
                             <option value="Pembayaran Perpanjangan Sertifikat REOR">Pembayaran Perpanjangan Sertifikat
                                 REOR
+                            </option>
+                            <option value="Pembayaran Mengulang Ujian Negara REOR">Pembayaran Mengulang Ujian Negara REOR
+                            </option>
+                            <option value="Pembayaran Mengulang Ujian COC - GMDSS">Pembayaran Mengulang Ujian COC - GMDSS
                             </option>
                             <!-- Tambahkan pilihan lain jika diperlukan -->
                         </select>
@@ -67,8 +75,8 @@
 
                     <div class="form-group">
                         <label for="Petugas">Petugas</label>
-                        <input type="text" class="form-control" id="petugas" name="petugas" autocomplete="name"
-                            required>
+                        <input type="text" class="form-control" id="petugas" name="petugas"
+                            value="{{ Auth::user()->nama_lengkap }}" readonly>
                     </div>
 
                     <div>
@@ -78,4 +86,49 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#nama_lengkap').on('input', function() {
+                var searchKeyword = $(this).val();
+                if (searchKeyword.length >= 2) {
+                    $.ajax({
+                        url: "{{ route('PesertaUjian.get') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            name: searchKeyword,
+                            "_token": "{{ csrf_token() }}",
+                        },
+                        success: function(data) {
+                            var dropdown = $('#nama_lengkap_dropdown');
+                            dropdown.empty();
+                            if (data.length > 0) {
+                                $.each(data, function(key, value) {
+                                    dropdown.append(
+                                        '<div class="dropdown-item" data-id="' +
+                                        value.id + '">' + value.nama_lengkap +
+                                        '</div>');
+                                });
+                                dropdown.show();
+                            } else {
+                                dropdown.hide();
+                            }
+                        }
+                    });
+                } else {
+                    $('#nama_lengkap_dropdown').hide();
+                }
+            });
+
+            $(document).on('click', '#nama_lengkap_dropdown .dropdown-item', function() {
+                var userId = $(this).data('id');
+                var userName = $(this).text();
+                $('#id_user').val(userId);
+                $('#nama_lengkap').val(userName);
+                $('#nama_lengkap_dropdown').hide();
+            });
+        });
+    </script>
 @endsection

@@ -9,20 +9,47 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\Facades\DataTables;
 
 class DaftarGMDSSController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $data = DaftarGMDSS::paginate(100);
+        if (request()->ajax()) {
+            $data = DaftarGMDSS::select(['id', 'seafare_code', 'nama_lengkap', 'nik', 'jenis_kelamin', 'email', 'no_telp', 'edit_foto']);
 
-        return view('data.data_pendaftar_gmdss', [
-            'data' => $data,
-        ]);
+            return DataTables::of($data)
+                ->addColumn('aksi', function ($row) {
+                    $btn = '<div class="btn-group">
+                            <a href="/report_pendaftar_diklat_gmdss_pdf/' . $row->id . '" class="btn btn-dark btn-sm">
+                                <i class="fas fa-file-pdf"></i>
+                            </a>
+                            <a href="/data_pendaftar_diklat_gmdss/show/' . $row->id . '" class="btn btn-info btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/data_pendaftar_diklat_gmdss/edit/' . $row->id . '" class="btn btn-warning btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="' . route('DaftarGMDSS.destroy', $row->id) . '" method="POST" style="display:inline;">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>';
+                    return $btn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
+
+        return view('data.data_pendaftar_gmdss');
     }
+
 
     /**
      * Show the form for creating a new resource.

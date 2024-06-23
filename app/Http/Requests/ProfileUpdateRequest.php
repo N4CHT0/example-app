@@ -17,6 +17,8 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'nama_lengkap' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'agama' => ['required', 'string', 'max:255'],
             'tanggal_lahir' => ['required'],
             'tempat_lahir' => ['required'],
             'no_telp' => ['required'],

@@ -29,12 +29,14 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if (auth()->user()->jenis_akun === 'admin') {
+            if (auth()->user()->jenis_akun === 'super_admin') {
                 return redirect()->intended(route('Dashboard.Admin'));
             } elseif (auth()->user()->jenis_akun === 'siswa') {
                 return redirect()->intended(route('Dashboard.Siswa'));
             } elseif (auth()->user()->jenis_akun === 'pengajar') {
                 return redirect()->intended(route('Dashboard.Pengajar'));
+            } elseif (auth()->user()->jenis_akun === 'pendaftar') {
+                return redirect()->intended(route('Dashboard.Pendaftar'));
             }
         }
 

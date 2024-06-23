@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -23,10 +21,17 @@ class User extends Authenticatable
         'id',
         'id_absensi',
         'nama_lengkap',
+        'alamat',
+        'agama',
         'email',
         'password',
         'jenis_akun',
         'jenis_diklat',
+        'status_akun',
+        'status_transaksi',
+        'layanan_tambahan',
+        'bukti_pembayaran',
+        'pendaftaran',
         'peserta_ujian',
         'tanggal_lahir',
         'tempat_lahir',
@@ -59,18 +64,14 @@ class User extends Authenticatable
         ];
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->{$model->getKeyName()} = rand(1, 999999); // Generate a random integer ID
-        });
-    }
-
     public function PesertaUjian()
     {
         return $this->hasMany(PesertaUjian::class, 'id_user');
+    }
+
+    public function Keuangan()
+    {
+        return $this->hasMany(Keuangan::class, 'id_user');
     }
 
     public function AbsensiPeserta()

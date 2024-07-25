@@ -2,7 +2,7 @@
     @if (auth()->user()->jenis_akun == 'super_admin')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{ route('Dashboard.Admin') }}" class="brand-link">
                 <img src="{{ asset('dashboard/dist/img/LOGO SIM.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-bold">SIM-BBU</span>
@@ -13,8 +13,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        @if (Auth::user()->foto)
+                            <img src="{{ asset('storage/img/' . Auth::user()->foto) }}" class="img-size-50"
+                                alt="User Image">
+                        @else
+                            <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-size-50"
+                                alt="Default User Image">
+                        @endif
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->nama_lengkap }}</a>
@@ -218,7 +223,7 @@
     @if (auth()->user()->jenis_akun == 'siswa')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{ route('Dashboard.Siswa') }}" class="brand-link">
                 <img src="{{ asset('dashboard/dist/img/LOGO SIM.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-bold">SIM-BBU</span>
@@ -229,8 +234,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        @if (Auth::user()->foto)
+                            <img src="{{ asset('storage/img/' . Auth::user()->foto) }}" class="img-size-50"
+                                alt="User Image">
+                        @else
+                            <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-size-50"
+                                alt="Default User Image">
+                        @endif
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->nama_lengkap }}</a>
@@ -310,7 +320,7 @@
     @if (auth()->user()->jenis_akun == 'pengajar')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{ route('Dashboard.Pengajar') }}" class="brand-link">
                 <img src="{{ asset('dashboard/dist/img/LOGO SIM.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-bold">SIM-BBU</span>
@@ -321,8 +331,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        @if (Auth::user()->foto)
+                            <img src="{{ asset('storage/img/' . Auth::user()->foto) }}" class="img-size-50"
+                                alt="User Image">
+                        @else
+                            <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-size-50"
+                                alt="Default User Image">
+                        @endif
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->nama_lengkap }}</a>
@@ -394,7 +409,7 @@
     @if (auth()->user()->jenis_akun == 'pendaftar')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="{{ route('Dashboard.Pendaftar') }}" class="brand-link">
                 <img src="{{ asset('dashboard/dist/img/LOGO SIM.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-bold">SIM-BBU</span>
@@ -405,8 +420,13 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                            alt="User Image">
+                        @if (Auth::user()->foto)
+                            <img src="{{ asset('storage/img/' . Auth::user()->foto) }}" class="img-size-50"
+                                alt="User Image">
+                        @else
+                            <img src="{{ asset('dashboard/dist/img/user2-160x160.jpg') }}" class="img-size-50"
+                                alt="Default User Image">
+                        @endif
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->nama_lengkap }}</a>

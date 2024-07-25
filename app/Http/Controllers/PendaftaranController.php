@@ -85,6 +85,7 @@ class PendaftaranController extends Controller
                 break;
             case 'cop':
                 app('App\Http\Controllers\DaftarCOPController')->store($request);
+                $this->updatePendaftaran($jenisDiklat);
                 break;
             case 'reor':
                 app('App\Http\Controllers\DaftarREORController')->store($request);
@@ -230,11 +231,14 @@ class PendaftaranController extends Controller
                     case 'SOU-MUALIM':
                         $total_tagihan = 6500000;
                         break;
+                    case 'SOU - M + COC-GMDSS':
+                        $total_tagihan = 9500000;
+                        break;
                     default:
                         $total_tagihan = 0;
                         break;
                 }
-                $keterangan = 'DIKLAT REOR - ' . $pilihan_diklat;
+                $keterangan = $pilihan_diklat;
                 break;
             default:
                 $keterangan = 'DIKLAT';

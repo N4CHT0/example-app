@@ -16,9 +16,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" autocomplete="name"
-                            value="{{ $data->nama }}" required>
+                        <label for="id_user">Nama Lengkap</label>
+                        <input type="hidden" id="id_user" name="id_user" value="{{ $data->User->nama_lengkap }}">
+                        <input type="text" class="form-control" id="nama_lengkap" placeholder="Cari nama lengkap"
+                            autocomplete="off">
+                        <div id="nama_lengkap_dropdown"></div>
                     </div>
 
                     <div class="form-group">
@@ -93,4 +95,49 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#nama_lengkap').on('input', function() {
+                var searchKeyword = $(this).val();
+                if (searchKeyword.length >= 2) {
+                    $.ajax({
+                        url: "{{ route('PesertaUjian.get') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            name: searchKeyword,
+                            "_token": "{{ csrf_token() }}",
+                        },
+                        success: function(data) {
+                            var dropdown = $('#nama_lengkap_dropdown');
+                            dropdown.empty();
+                            if (data.length > 0) {
+                                $.each(data, function(key, value) {
+                                    dropdown.append(
+                                        '<div class="dropdown-item" data-id="' +
+                                        value.id + '">' + value.nama_lengkap +
+                                        '</div>');
+                                });
+                                dropdown.show();
+                            } else {
+                                dropdown.hide();
+                            }
+                        }
+                    });
+                } else {
+                    $('#nama_lengkap_dropdown').hide();
+                }
+            });
+
+            $(document).on('click', '#nama_lengkap_dropdown .dropdown-item', function() {
+                var userId = $(this).data('id');
+                var userName = $(this).text();
+                $('#id_user').val(userId);
+                $('#nama_lengkap').val(userName);
+                $('#nama_lengkap_dropdown').hide();
+            });
+        });
+    </script>
 @endsection

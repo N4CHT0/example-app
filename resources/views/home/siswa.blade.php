@@ -63,10 +63,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <span>Harap Menunggu Proses Validasi, Setelah Proses Validasi Maka Fitur Pada Aplikasi
-                                        Akan Dibuka Sepenuhnya</span>
-                                    <br>
-                                    <span>Jika Terdapat Masalah Maka Hubungi Admin Di Kontak Berikut Ini</span>
+                                    <div>
+                                        <label style="color: black; font-weight: 500">Jika Terdapat Masalah Maka Hubungi
+                                            Admin Di Kontak Berikut Ini</label>
+                                    </div>
+                                    <div>
+                                        <a href="https://wa.me/6282131042820" class="btn btn-success mt-3" target="_blank">
+                                            <i class="fab fa-whatsapp"></i> Hubungi Admin
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,80 +117,84 @@
                         <div class="col-sm-4 mb-3"> <!-- Add margin-bottom class mb-3 -->
                             <a href="{{ route('pendaftaran.jenis', ['jenis_diklat' => 'perpanjang_reor']) }}"
                                 class="d-block text-white" style="text-decoration: none;">
-                                <div class="position-relative p-3 bg-gray" style="height: 180px;">
+                                <div class="position-relative p-0 bg-gray" style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('dashboard/dist/img/P_REOR.jpg') }}" alt="REOR"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;">
                                     <div class="ribbon-wrapper">
                                         <div class="ribbon bg-primary">
                                             NEW
                                         </div>
                                     </div>
-                                    <span style="color: white; font-size: 16px;">Pendaftaran Perpanjangan Sertifikat
-                                        REOR</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4 mb-3"> <!-- Add margin-bottom class mb-3 -->
                             <a href="{{ route('pendaftaran.jenis', ['jenis_diklat' => 'perpanjang_gmdss']) }}"
                                 class="d-block text-white" style="text-decoration: none;">
-                                <div class="position-relative p-3 bg-gray" style="height: 180px;">
+                                <div class="position-relative p-0 bg-gray" style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('dashboard/dist/img/P_GMDSS.jpg') }}" alt="PERPANJANG GMDSS"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;">
                                     <div class="ribbon-wrapper">
                                         <div class="ribbon bg-primary">
                                             NEW
                                         </div>
                                     </div>
-                                    <span style="color: white; font-size: 16px;">Pendaftaran Perpanjangan Sertifikat
-                                        GMDSS</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4 mb-3"> <!-- Add margin-bottom class mb-3 -->
                             <a href="{{ route('pendaftaran.jenis', ['jenis_diklat' => 'mcu']) }}"
                                 class="d-block text-white" style="text-decoration: none;">
-                                <div class="position-relative p-3 bg-gray" style="height: 180px;">
+                                <div class="position-relative p-0 bg-gray" style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('dashboard/dist/img/D_MCU.jpg') }}" alt="MCU"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;">
                                     <div class="ribbon-wrapper">
                                         <div class="ribbon bg-primary">
                                             NEW
                                         </div>
                                     </div>
-                                    <span style="color: white; font-size: 16px;">Pendaftaran Sertifikat MCU</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4 mb-3"> <!-- Add margin-bottom class mb-3 -->
                             <a href="{{ route('pendaftaran.jenis', ['jenis_diklat' => 'cop']) }}"
                                 class="d-block text-white" style="text-decoration: none;">
-                                <div class="position-relative p-3 bg-gray" style="height: 180px;">
+                                <div class="position-relative p-0 bg-gray" style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('dashboard/dist/img/D_COP.jpg') }}" alt="COP"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;">
                                     <div class="ribbon-wrapper">
                                         <div class="ribbon bg-primary">
                                             NEW
                                         </div>
                                     </div>
-                                    <span style="color: white; font-size: 16px;">Pendaftaran Diklat COP</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4 mb-3"> <!-- Add margin-bottom class mb-3 -->
                             <a href="{{ route('pendaftaran.jenis', ['jenis_diklat' => 'gmdss']) }}"
                                 class="d-block text-white" style="text-decoration: none;">
-                                <div class="position-relative p-3 bg-gray" style="height: 180px;">
+                                <div class="position-relative p-0 bg-gray" style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('dashboard/dist/img/D_GMDSS.jpg') }}" alt="GMDSS"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;">
                                     <div class="ribbon-wrapper">
                                         <div class="ribbon bg-primary">
                                             NEW
                                         </div>
                                     </div>
-                                    <span style="color: white; font-size: 16px;">Pendaftaran Diklat GMDSS</span>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-4 mb-3"> <!-- Add margin-bottom class mb-3 -->
                             <a href="{{ route('pendaftaran.jenis', ['jenis_diklat' => 'reor']) }}"
                                 class="d-block text-white" style="text-decoration: none;">
-                                <div class="position-relative p-3 bg-gray" style="height: 180px;">
+                                <div class="position-relative p-0 bg-gray" style="height: 180px; overflow: hidden;">
+                                    <img src="{{ asset('dashboard/dist/img/D_REOR.jpg') }}" alt="REOR"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;">
                                     <div class="ribbon-wrapper">
                                         <div class="ribbon bg-primary">
                                             NEW
                                         </div>
                                     </div>
-                                    <span style="color: white; font-size: 16px;">Pendaftaran Diklat REOR</span>
                                 </div>
                             </a>
                         </div>

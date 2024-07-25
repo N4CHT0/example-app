@@ -14,13 +14,9 @@
                     <div class="col-md-4 text-center">
                         <div class="card">
                             <div class="card-body">
-                                <span>Petunjuk Penggunaan Aplikasi</span>
-                                <span>1. </span>
-                                <span>2. </span>
-                                <span>3. </span>
-                                <span>4. </span>
-                                <span>5. </span>
-                                <span>6. </span>
+                                <img class="detail-value" id="foto_sertifikat"
+                                    src="{{ asset('storage/img/' . Auth::user()->foto) }}" alt="Foto"
+                                    style="max-width: 380px; height: 380px;">
                             </div>
                         </div>
                     </div>
@@ -80,10 +76,19 @@
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <span>Harap Menunggu Proses Validasi, Setelah Proses Validasi Maka Fitur Pada Aplikasi
-                                        Akan Dibuka Sepenuhnya</span>
-                                    <br>
-                                    <span>Jika Terdapat Masalah Maka Hubungi Admin Di Kontak Berikut Ini</span>
+                                    <label style="color: black; font-weight: 500">Harap Menunggu Proses Validasi, Setelah
+                                        Proses Validasi Maka Fitur Pada Aplikasi
+                                        Akan Dibuka Sepenuhnya</label>
+                                </div>
+                                <br>
+                                <div>
+                                    <label style="color: black; font-weight: 500">Jika Terdapat Masalah Maka Hubungi
+                                        Admin Di Kontak Berikut Ini</label>
+                                </div>
+                                <div>
+                                    <a href="https://wa.me/6282131042820" class="btn btn-success mt-3" target="_blank">
+                                        <i class="fab fa-whatsapp"></i> Hubungi Admin
+                                    </a>
                                 </div>
                             </div>
                         </div>

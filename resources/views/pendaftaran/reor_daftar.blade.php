@@ -16,7 +16,7 @@
                                 <option value="SOU-REGULAR">SOU-REGULAR</option>
                                 <option value="SRE-I">SRE-I</option>
                                 <option value="SRE-II">SRE-II</option>
-                                <option value="SOU-M-COC-GMDSS">SOU-M + COC GMDSS</option>
+                                <option value="SOU-M + COC-GMDSS">SOU-M + COC GMDSS</option>
                             </select>
                         </div>
                         <br>

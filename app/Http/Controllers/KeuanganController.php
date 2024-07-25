@@ -34,15 +34,16 @@ class KeuanganController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $data = Keuangan::with('user')
+            $data = Keuangan::with('User')
+                ->where('data_pembayaran', 'bukti_bayar')
                 ->select(['id', 'id_user', 'berita_pembayaran', 'status_pembayaran', 'tanggal_pembayaran', 'petugas']);
 
             return DataTables::of($data)
                 ->addColumn('id_user', function ($row) {
-                    return $row->user->id;
+                    return $row->User ? $row->User->id : 'N/A';  // Cek null
                 })
                 ->addColumn('nama_lengkap', function ($row) {
-                    return $row->user->nama_lengkap;
+                    return $row->User ? $row->User->nama_lengkap : 'N/A';  // Cek null
                 })
                 ->addColumn('aksi', function ($row) {
                     $btn = '<div class="btn-group">
@@ -74,7 +75,7 @@ class KeuanganController extends Controller
     public function tagihan()
     {
         if (request()->ajax()) {
-            $data = Keuangan::with('user')
+            $data = Keuangan::with('User')
                 ->where('data_pembayaran', 'tagihan')
                 ->select(['id', 'id_user', 'berita_pembayaran', 'status_pembayaran', 'total_tagihan']);
 

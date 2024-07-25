@@ -150,7 +150,7 @@
 
         <div class="signature">
             <p>Surabaya, {{ $periode_pembayaran }}</p>
-            <p>M Eri Kusyairi</p>
+            <p>Mey Prayogo Radi Putro, S.Kom.</p>
         </div>
 
         <div class="qr-code">

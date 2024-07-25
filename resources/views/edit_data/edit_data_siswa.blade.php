@@ -36,8 +36,16 @@
 
                     <div class="form-group">
                         <label for="agama">Agama</label>
-                        <input type="text" class="form-control" id="agama" name="agama"
-                            value="{{ $user->agama }}"">
+                        <select class="form-control" id="agama" name="agama" required>
+                            <!-- Pilihan role sesuai dengan kebutuhan -->
+                            <option value="ISLAM">ISLAM</option>
+                            <option value="KRISTEN">KRISTEN</option>
+                            <option value="KATHOLIK">KATHOLIK</option>
+                            <option value="HINDU">HINDU</option>
+                            <option value="BUDHA">BUDHA</option>
+                            <option value="KHONGHUCU">KHONGHUCU</option>
+                            <!-- Tambahkan pilihan lain jika diperlukan -->
+                        </select>
                     </div>
 
                     <div class="form-group">

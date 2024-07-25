@@ -151,7 +151,7 @@
 
             <div class="signature">
                 <p>Surabaya, 2024</p>
-                <p>M Eri Kusyairi</p>
+                <p>Mey Prayogo Radi Putro, S.Kom.</p>
             </div>
 
             <div class="qr-code">

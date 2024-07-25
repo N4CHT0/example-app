@@ -46,24 +46,24 @@
                         <div class="form-group">
                             <label for="no_telp">No Telp</label>
                             <input type="number" class="form-control" id="no_telp" name="no_telp" autocomplete="tel"
-                                required>
+                                value="{{ Auth::user()->no_telp }}" required>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <input type="text" class="form-control" id="alamat" name="alamat"
-                                autocomplete="street-address" required>
+                                autocomplete="street-address" value="{{ Auth::user()->alamat }}" required>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="agama">Agama</label>
                             <select class="form-control" id="agama" name="agama" required>
-                                <option value="ISLAM">ISLAM</option>
-                                <option value="KRISTEN">KRISTEN</option>
-                                <option value="KATHOLIK">KATHOLIK</option>
-                                <option value="HINDU">HINDU</option>
-                                <option value="BUDHA">BUDHA</option>
-                                <option value="KHONGHUCU">KHONGHUCU</option>
+                                <option value="ISLAM" @selected(Auth::user()->agama == 'ISLAM')>ISLAM</option>
+                                <option value="KRISTEN" @selected(Auth::user()->agama == 'KRISTEN')>KRISTEN</option>
+                                <option value="KATHOLIK" @selected(Auth::user()->agama == 'KATHOLIK')>KATHOLIK</option>
+                                <option value="HINDU" @selected(Auth::user()->agama == 'HINDU')>HINDU</option>
+                                <option value="BUDHA" @selected(Auth::user()->agama == 'BUDHA')>BUDHA</option>
+                                <option value="KHONGHUCU" @selected(Auth::user()->agama == 'KHONGHUCU')>KHONGHUCU</option>
                             </select>
                         </div>
                         <br>
@@ -163,8 +163,8 @@
                         <div class="form-group">
                             <label for="jenis_kelamin">Jenis Kelamin</label>
                             <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
-                                <option value="LAKI-LAKI">LAKI-LAKI</option>
-                                <option value="PEREMPUAN">PEREMPUAN</option>
+                                <option value="LAKI-LAKI" @selected(Auth::user()->jenis_kelamin == 'LAKI-LAKI')>LAKI-LAKI</option>
+                                <option value="PEREMPUAN" @selected(Auth::user()->jenis_kelamin == 'PEREMPUAN')>PEREMPUAN</option>
                             </select>
                         </div>
                         <br>
